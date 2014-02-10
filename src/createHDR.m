@@ -3,5 +3,6 @@ function [ output_args ] = createHDR( directory,pixelArray,exposure )
 %   Detailed explanation goes here
 
 
+
 end
 

@@ -1,5 +1,6 @@
 function [ imgHDRfName ] = simpleHDR(directory,pixelArray)
-% simpleHDR Summary of this function goes here
+% simpleHDR Constructs a "simple" hdr image by averaging the pixel values 
+%           over all of the images given to create a "simple" hdr image
 %--------------------------------------------------------------------------
 %   Author: Saikat Gomes
 %           Steve Lazzaro
