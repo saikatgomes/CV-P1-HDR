@@ -1,4 +1,4 @@
-function [ ] = simpleHDR(directory,pixelArray)
+function [ imgHDRfName ] = simpleHDR(directory,pixelArray)
 % simpleHDR Summary of this function goes here
 %--------------------------------------------------------------------------
 %   Author: Saikat Gomes
@@ -22,13 +22,14 @@ function [ ] = simpleHDR(directory,pixelArray)
     for i=1:fileNum
         for r=1:row
             for c=1:col    
-            imgSimpleHDR(r,c,1)=imgSimpleHDR(r,c,1) +pixelArray(i,r,c,1)/fileNum;
-            imgSimpleHDR(r,c,2)=imgSimpleHDR(r,c,2) +pixelArray(i,r,c,2)/fileNum;
-            imgSimpleHDR(r,c,3)=imgSimpleHDR(r,c,3) +pixelArray(i,r,c,3)/fileNum;
+                imgSimpleHDR(r,c,1)=imgSimpleHDR(r,c,1) +pixelArray(i,r,c,1)/fileNum;
+                imgSimpleHDR(r,c,2)=imgSimpleHDR(r,c,2) +pixelArray(i,r,c,2)/fileNum;
+                imgSimpleHDR(r,c,3)=imgSimpleHDR(r,c,3) +pixelArray(i,r,c,3)/fileNum;
             end        
         end
     end
 
     imgSimpleHDR=uint8(imgSimpleHDR);
-    imwrite(imgSimpleHDR,strcat(directory,'/','simpleHDR-',datestr(now,'dd-mm-yyyy-HH-MM-SS-FFF'),'.tif'));
+    imgHDRfName=strcat('simpleHDR-',datestr(now,'dd-mm-yyyy-HH-MM-SS-FFF'),'.tif');
+    imwrite(imgSimpleHDR,strcat(directory,'/',imgHDRfName));
 

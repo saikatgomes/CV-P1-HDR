@@ -3,7 +3,8 @@ function [] = main(directory)
 %   Detailed explanation goes here
 
     [pixelArray,exposure] = readImages(directory);
-    simpleHDR(directory,pixelArray);
+    imgHDRfName=simpleHDR(directory,pixelArray);
+    distortColorC(directory,imgHDRfName);
     %createHDR(directory,pixelArray,exposure);
     %createToneMap(directory,pixelArray,exposure);
     
