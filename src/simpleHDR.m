@@ -5,13 +5,14 @@ function [ imgHDRfName ] = simpleHDR(directory,pixelArray)
 %           Steve Lazzaro
 %   CS 766 - Assignment 1
 %   Params: directory - relative directory of the *.info file
-%   Return: pixelArray a 4D array with the pixel data of all images read
+%           pixelArray a 4D array with the pixel data of all images read
 %               pixelArray(n,r,c,rbg)
 %                   n=image number
 %                   r=row value
 %                   c=column value
 %                   rgb=1=R, 2=G, 3=B
 %           exposure a vector containing the exposure values
+%   Returns: name of simple hdr file created
 %--------------------------------------------------------------------------
 
     fileNum=size(pixelArray,1);
