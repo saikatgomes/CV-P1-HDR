@@ -5,13 +5,13 @@ function [pixelArray,exposure] = readImages(directory)
 %           Steve Lazzaro
 %   CS 766 - Assignment 1
 %   Params: directory - relative directory of the *.info file
-%   Return: pixelArray a 4D array with the pixel data of all images read
+%   Return: pixelArray - a 4D array with the pixel data of all images read
 %               pixelArray(n,r,c,rbg)
 %                   n=image number
 %                   r=row value
 %                   c=column value
 %                   rgb=1=R, 2=G, 3=B
-%           exposure a vector containing the exposure values
+%           exposure - a vector containing the log of shutter speeds
 %--------------------------------------------------------------------------
 
     infoFile = dir(strcat(directory,'/*.info'));    %info file
@@ -26,7 +26,7 @@ function [pixelArray,exposure] = readImages(directory)
         lineVal=strsplit(tLine);    %split each line on spaces
         img = strcat(directory,'/',lineVal(1)); %name of image file
         img=char(img);
-        exposure(i)=str2double(lineVal(2)); %exposure value for this file
+        exposure(i)=log(str2double(lineVal(2))); %exposure value for this file
         currentImage=imread(img);   %get pixel data value for this pic
         if ~exist('pixelArray','var')   %initialize array first time
             row=size(currentImage,1);   %assume same row & col for all images

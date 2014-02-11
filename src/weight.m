@@ -1,4 +1,4 @@
-function [w] = weight(maxZ,minZ,pixelValue)
+function [w] = weight(minZ,maxZ,pixelValue)
 % w is the weighting function for the different pixels
 %--------------------------------------------------------------------------
 %   Author: Saikat Gomes
