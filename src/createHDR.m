@@ -1,14 +1,20 @@
 function [logExposure,irradiance] = createHDR(pixelArray,exposure, smoothness)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
-%
-%
-%
-%
-%
-%
-%
-%
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 1
+%   Params: directory - relative directory of the *.info file
+%           pixelArray a 4D array with the pixel data of all images read
+%               pixelArray(n,r,c,rbg)
+%                   n=image number
+%                   r=row value
+%                   c=column value
+%                   rgb=1=R, 2=G, 3=B
+%           exposure a vector containing the exposure values
+%   Returns: name of simple hdr file created
+%--------------------------------------------------------------------------
 
     vals = 256;
     numPhotos = size(pixelArray,1);
