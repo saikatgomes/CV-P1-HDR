@@ -5,6 +5,7 @@ function [pixelArray,exposure] = readImages(directory)
 %           Steve Lazzaro
 %   CS 766 - Assignment 1
 %   Params: directory - relative directory of the *.info file
+%
 %   Return: pixelArray - a 4D array with the pixel data of all images read
 %               pixelArray(n,r,c,rbg)
 %                   n=image number
