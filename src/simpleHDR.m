@@ -32,6 +32,6 @@ function [ imgHDRfName ] = simpleHDR(directory,pixelArray)
     end
 
     imgSimpleHDR=uint8(imgSimpleHDR);
-    imgHDRfName=strcat('simpleHDR-',datestr(now,'dd-mm-yyyy-HH-MM-SS-FFF'),'.tif');
+    imgHDRfName=strcat('simpleHDR-',datestr(now,'mm-dd-yyyy-HH-MM-SS-FFF'),'.tif');
     imwrite(imgSimpleHDR,strcat(directory,'/',imgHDRfName));
 
