@@ -11,9 +11,9 @@ function [thresholdBitmap,exclusionBitmap] = ComputeBitmaps(img,tolerance)
 %   Return: thresholdBitmap - threshold bitmap for img
 %           exclusionBitmap - exclusion bitmap for img
 %--------------------------------------------------------------------------
-
-%TODO: SHOULD MEASURE IF MAJORITY OF PIXELS ARE WHITE OR BLACK TO KNOW
-%       IF SHOULD USE 17TH OR 83RD PERCENTILE
+%
+%TODO: ADD IN FUNCTIONALITY WHERE MEASURE IF MAJORITY OF PIXELS ARE WHITE 
+%       OR BLACK TO KNOW IF SHOULD USE 17TH OR 83RD PERCENTILE
 
 medVal = median(img(:));
 thresholdBitmap = zeros(size(img,1), size(img,2));
