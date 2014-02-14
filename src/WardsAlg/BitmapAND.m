@@ -1,4 +1,4 @@
-function [bit_ret] = BitmapAND(bm1,bm2)
+function [bm_ret] = BitmapAND(bm1,bm2)
 % BitmapAND: get the "and" bitmap of bm1 and bm2
 %--------------------------------------------------------------------------
 %   Author: Saikat Gomes

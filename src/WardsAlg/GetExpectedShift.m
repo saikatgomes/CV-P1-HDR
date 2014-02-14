@@ -22,7 +22,7 @@ cur_shift = [0 0];
 if max_shift > 0
     shrunkImg1 = ImageShrink2(referenceImg);
     shrunkImg2 = ImageShrink2(img2);
-    cur_shift = GetExpectedShift(shrunkImg1,shrunkImg2,max_shift-1);
+    cur_shift = GetExpectedShift(shrunkImg1,shrunkImg2,max_shift-1, tolerance);
     cur_shift(1) = cur_shift(1) * 2;
     cur_shift(2) = cur_shift(2) * 2;
 else
