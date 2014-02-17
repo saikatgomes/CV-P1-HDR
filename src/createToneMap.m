@@ -70,9 +70,12 @@ for r=1:rows
         if(min>exp(E))
             min=exp(E);
         end
-        newMap(r,c,1)=pixelArray(1,r,c,1)*exp(E);
-        newMap(r,c,2)=pixelArray(1,r,c,2)*exp(E);
-        newMap(r,c,3)=pixelArray(1,r,c,3)*exp(E);
+%         newMap(r,c,1)=pixelArray(1,r,c,1)*exp(E);
+%         newMap(r,c,2)=pixelArray(1,r,c,2)*exp(E);
+%         newMap(r,c,3)=pixelArray(1,r,c,3)*exp(E);
+        newMap(r,c,1)=exp(E);
+        newMap(r,c,2)=exp(E);
+        newMap(r,c,3)=exp(E);
         
     end        
 end

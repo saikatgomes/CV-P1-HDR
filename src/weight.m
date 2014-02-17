@@ -9,7 +9,7 @@ function [w] = weight(minZ,maxZ,pixelValue)
 %           pixelValue - the current pixel value to be weighted
 %   Returns: weight for pixel value
 %--------------------------------------------------------------------------
-midZ = (maxZ + minZ) / 2.0;
+midZ = (minZ + maxZ) / 2.0;
 if (pixelValue <= midZ) 
     w = pixelValue - minZ;
 else
