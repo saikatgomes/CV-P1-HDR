@@ -26,7 +26,7 @@ function [pixelArray,logT] = readImages(directory)
     for i=1:count
         lineVal=strsplit(tLine);    %split each line on spaces
         img = strcat(directory,'/',lineVal(1)); %name of image file
-        display(strcat('Reading Image: ',img));
+        %display(strcat('Reading Image: ',img));
         img=char(img);
         logT(i)=log(1/str2double(lineVal(2))); %exposure value for this file
         currentImage=imread(img);   %get pixel data value for this pic

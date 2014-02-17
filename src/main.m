@@ -1,4 +1,4 @@
-function [newMap,hdr,rdb] = main(directory)
+function [newMap,pixelArray,hdr,rdb, logExposure, irradiance] = main(directory)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 

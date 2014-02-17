@@ -54,10 +54,10 @@ function [logExposure,irradiance] = createHDR(pixelArray,logT, smoothness)
     x = A\b;
     
     logExposure = x(1:n);
-     a = zeros(256,1);
-     for i = 1:256
-         a(i,1) = i;
-     end
+    a = zeros(256,1);
+    for i = 1:256
+        a(i,1) = i;
+    end
     plot(a,logExposure);
     irradiance = x(n + 1:size(x, 1));
     
