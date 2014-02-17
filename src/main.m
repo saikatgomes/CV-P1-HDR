@@ -7,6 +7,7 @@ function [pixelArray, newMap, logExposure1, logExposure2, logExposure3] = main(d
     [logExposure2,irradiance2]=createHDR(pixelArray,logT, 1,2);
     [logExposure3,irradiance3]=createHDR(pixelArray,logT, 1,3);
     [newMap] = createToneMap(directory,pixelArray,logExposure1,logExposure2,logExposure3,logT);
+    %[newMap] = createToneMap(directory,pixelArray,logExposure1,logExposure2,logExposure3,logT);
     
 end
 

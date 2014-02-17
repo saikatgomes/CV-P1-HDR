@@ -1,4 +1,4 @@
-function [newMap] = createToneMap(directory,pixelArray,logExposure1,logExposure2,logExposure3,logT)
+function [newMap] = createToneMapSmooth(directory,pixelArray,logExposure1,logExposure2,logExposure3,logT)
 %UNTITLED5 Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -65,17 +65,17 @@ for r=1:rows
         for j=1:p
             pixVal=double(pixelArray(p,r,c,1)+1);
             w=double(weight(0,255,pixVal));
-            num1=num1+(w*(logExposure1(pixVal)-logT(p)));
+            num1=num1+(w*(getLogExpAvg(logExposure1,pixVal)-logT(p)));
             den1=den1+(w);
             
             pixVal=double(pixelArray(p,r,c,2)+1);
             w=double(weight(0,255,pixVal));
-            num2=num2+(w*(logExposure2(pixVal)-logT(p)));
+            num2=num2+(w*(getLogExpAvg(logExposure2,pixVal)-logT(p)));
             den2=den2+(w);
             
             pixVal=double(pixelArray(p,r,c,3)+1);
             w=double(weight(0,255,pixVal));
-            num3=num3+(w*(logExposure3(pixVal)-logT(p)));
+            num3=num3+(w*(getLogExpAvg(logExposure3,pixVal)-logT(p)));
             den3=den3+(w);
         end
         E1=log(double(num1/den1));
