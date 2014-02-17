@@ -30,8 +30,28 @@ function [ imgHDRfName ] = simpleHDR(directory,pixelArray)
             end        
         end
     end
-
+   
+%     row=int32(row/10)
+%     col=int32(col/10)
+%     %newImg=zeros(uint8(row),uint8(col),3);
+%     newImg=zeros(row,col,3);
+%     for m=1:fileNum
+%         for i =1:row
+%             for j=1:col
+%                 newImg(i,j,1)=pixelArray(m,i,j,1);
+%                 newImg(i,j,2)=pixelArray(m,i,j,2);
+%                 newImg(i,j,3)=pixelArray(m,i,j,3);
+%             end
+%             %newImg(i,j)
+%         end
+%         newImg=uint8(newImg);        
+%         imwrite(newImg,strcat(directory,'/',int2str(m),'-srgTestimg.tif'));
+%     end
+    
+    
     imgSimpleHDR=uint8(imgSimpleHDR);
+ 
     imgHDRfName=strcat('simpleHDR-',datestr(now,'mm-dd-yyyy-HH-MM-SS-FFF'),'.tif');
     imwrite(imgSimpleHDR,strcat(directory,'/',imgHDRfName));
+
 

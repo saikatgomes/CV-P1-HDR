@@ -1,13 +1,10 @@
-function [] = main(directory)
+function [newMap,hdr,rdb] = main(directory)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 
-    [pixelArray,exposure] = readImages(directory);
-    imgHDRfName=simpleHDR(directory,pixelrray);
-    createHDR(pixelArray,exposure, smoothness);
-    %distortColorC(directory,imgHDRfName);
-    %createHDR(directory,pixelArray,exposure);
-    %createToneMap(directory,pixelArray,exposure);
+    [pixelArray,logT] = readImages(directory);
+    [logExposure,irradiance]=createHDR(pixelArray,logT, 1);
+    [newMap,hdr,rdb] = createToneMap(directory,pixelArray,logExposure,logT);
     
 end
 
