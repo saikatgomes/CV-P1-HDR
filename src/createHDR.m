@@ -1,4 +1,4 @@
-function [logExposure,irradiance] = createHDR(pixelArray,logT, smoothness)
+function [logExposure,irradiance] = createHDR(pixelArray,logT, smoothness,color)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 %--------------------------------------------------------------------------
@@ -31,8 +31,8 @@ function [logExposure,irradiance] = createHDR(pixelArray,logT, smoothness)
         for j = 1:p
             i_row=rand_row(i,1);
             j_col=rand_col(i,1);            
-            w = weight(0,255,pixelArray(j,i_row,j_col,1) + 1);  %only R
-            A(k, pixelArray(j,i_row,j_col,1) + 1) = w;            
+            w = weight(0,255,pixelArray(j,i_row,j_col,color) + 1);  %only R
+            A(k, pixelArray(j,i_row,j_col,color) + 1) = w;            
             A(k, n + i) = -1*double(w);            
             b(k, 1) = double(w) * logT(j,1);            
             k = k + 1;
@@ -62,4 +62,3 @@ function [logExposure,irradiance] = createHDR(pixelArray,logT, smoothness)
     irradiance = x(n + 1:size(x, 1));
     
 end
-
