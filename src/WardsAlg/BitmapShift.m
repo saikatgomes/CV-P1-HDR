@@ -1,5 +1,5 @@
 function [map_ret] = BitmapShift(bitmap, x, y)
-% BitmapShift : shift bitmap by x and y given
+% BitmapShift : shift bitmap (or just a 2d array of pixels) by x and y given
 %--------------------------------------------------------------------------
 %   Author: Saikat Gomes
 %           Steve Lazzaro
