@@ -32,3 +32,8 @@ function [g]=gsolve(Z,B,l,w)
     g = x(1:n);
     lE = x(n+1:size(x,1));
     
+    a = zeros(256,1);
+    for i = 1:256
+        a(i,1) = i;
+    end
+    figure; plot(a,g);
