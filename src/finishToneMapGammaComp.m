@@ -13,6 +13,7 @@ function [updatedRGBmatrix] = finishToneMapGammaComp(radianceMatrix, type)
 %               form
 %--------------------------------------------------------------------------
 
+%TODO: convert radiance matrix to hdr
 if type == 1
     updatedRGBmatrix = tonemap(double(radianceMatrix));
 elseif type == 2
