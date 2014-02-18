@@ -5,7 +5,7 @@ function [x_y_shift_amounts] = GetExpectedShift(referenceImg, img2, max_shift, t
 %           Steve Lazzaro
 %   CS 766 - Assignment 1
 %   Params: referenceImg - 2-d gray image.  This is the reference image 
-%                           that is used to compare to all other images 
+%                           that is used to compare to the other image 
 %                           that will be used. Use GetGrayImage function
 %                           if referenceImg is in RGB form
 %           img2 - 2-d gray image.  Use GetGrayImage if img2 is in RGB form
@@ -30,8 +30,9 @@ else
     cur_shift(2) = 0;
 end
 
-[tb1, eb1] = ComputeBitmaps(referenceImg, tolerance);
-[tb2, eb2] = ComputeBitmaps(img2, tolerance);
+percentile = CalculatePercentile(referenceImg, img2);
+[tb1, eb1] = ComputeBitmaps(referenceImg, tolerance,percentile);
+[tb2, eb2] = ComputeBitmaps(img2, tolerance,percentile);
 min_error = size(img2,1) * size(img2,2);
 for i = -1:1
     for j = -1:1

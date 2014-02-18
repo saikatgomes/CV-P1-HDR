@@ -1,4 +1,4 @@
-function [thresholdBitmap,exclusionBitmap] = ComputeBitmaps(img,tolerance)
+function [thresholdBitmap,exclusionBitmap] = ComputeBitmaps(img,tolerance,percentileVal)
 % ComputeBitmaps : compute threshold and exclusion bitmaps for img
 %--------------------------------------------------------------------------
 %   Author: Saikat Gomes
@@ -7,26 +7,27 @@ function [thresholdBitmap,exclusionBitmap] = ComputeBitmaps(img,tolerance)
 %   Params: img - 2-d image
 %           tolerance - the tolerance for exclusion bitmap (use 5 as
 %           default)
+%           medianValue - the median value to used based on if image is too
+%           light, too dark, or has good balance
 %
 %   Return: thresholdBitmap - threshold bitmap for img
 %           exclusionBitmap - exclusion bitmap for img
 %--------------------------------------------------------------------------
-%
-%TODO: ADD IN FUNCTIONALITY WHERE MEASURE IF MAJORITY OF PIXELS ARE WHITE 
-%       OR BLACK TO KNOW IF SHOULD USE 17TH OR 83RD PERCENTILE
 
-medVal = median(img(:));
+
+%medVal = median(img(:));
+percentile = prctile(img(:),percentileVal,1);
 thresholdBitmap = zeros(size(img,1), size(img,2));
 exclusionBitmap = zeros(size(img,1), size(img,2));
 for row = 1:size(img,1)
     for column = 1:size(img,2)
         currPix = img(row,column);
-        if currPix > medVal
+        if currPix > percentile
             thresholdBitmap(row,column) = 1;
         else
             thresholdBitmap(row,column) = 0;
         end
-        if currPix > medVal + tolerance || currPix < medVal - tolerance
+        if (currPix > (percentile + tolerance)) || (currPix < (percentile - tolerance))
             exclusionBitmap(row,column) = 1;
         else
             exclusionBitmap(row,column) = 0;

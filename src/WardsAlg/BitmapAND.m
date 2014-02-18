@@ -14,7 +14,7 @@ for row = 1:size(bm1,1)
     for column = 1:size(bm1:2)
         val1 = bm1(row,column);
         val2 = bm2(row,column);
-        if (val1 == 1 && val2) == 1
+        if (val1 == 1 && val2 == 1)
             bm_ret(row,column) = 1;
         else
             bm_ret(row,column) = 0;

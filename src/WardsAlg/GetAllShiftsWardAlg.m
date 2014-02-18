@@ -17,16 +17,54 @@ function [shifts_matrix] = GetAllShiftsWardAlg(pixArray,ref_index, max_shift, to
 %                           contains the y shift.  The row
 %                           corresponds to the image number
 %--------------------------------------------------------------------------
-% Treats last image in pixArray as reference image
 
-shifts_matrix = zeros(size(pixArray,1),2);
-grayReferenceImg = GetGrayImage(pixArray(ref_index,:,:,:));
-for i = 1:size(pixArray,1)
-    if i ~= ref_index
-        currGrayImg = GetGrayImage(pixArray(i,:,:,:));
-        curr_shifts = GetExpectedShift(grayReferenceImg,currGrayImg,max_shift,tolerance);
-        shifts_matrix(i,:) = curr_shifts;
+% compares everything in pix array to reference image
+
+% numphotos = size(pixArray,1);
+% shifts_matrix = zeros(numphotos,2);
+% grayReferenceImg = GetGrayImage(pixArray(ref_index,:,:,:));
+% for i = 1:numphotos
+%     if i ~= ref_index
+%         currGrayImg = GetGrayImage(pixArray(i,:,:,:));
+%         curr_shifts = GetExpectedShift(grayReferenceImg,currGrayImg,max_shift,tolerance);
+%         shifts_matrix(i,:) = curr_shifts;
+%     end
+% end
+
+numphotos = size(pixArray,1);
+if (ref_index > numphotos)
+    display('ERROR: reference image must have index less than the number of photos');
+    return;
+end
+
+shifts_matrix = zeros(numphotos,2);
+%grayReferenceImg = GetGrayImage(pixArray(ref_index,:,:,:));
+for i = 1:ref_index
+    if i + 1 > ref_index
+        break;
     end
+    currGrayImg = GetGrayImage(pixArray(i,:,:,:));
+    currRefImg = GetGrayImage(pixArray(i + 1,:,:,:));
+    % filter to emphasize edges before estimating the shift
+    h = fspecial('prewitt');
+    currGrayImg = imfilter(currGrayImg,h);
+    currRefImg = imfilter(currRefImg,h);
+    curr_shifts = GetExpectedShift(currRefImg,currGrayImg,max_shift,tolerance);
+    shifts_matrix(i,:) = curr_shifts;
+end
+
+for j = ref_index:numphotos
+    if j + 1 > numphotos
+        break;
+    end
+    currGrayImg = GetGrayImage(pixArray(j + 1,:,:,:));
+    currRefImg = GetGrayImage(pixArray(j,:,:,:));
+    % filter to emphasize edges before estimating the shift
+    h = fspecial('prewitt');
+    currGrayImg = imfilter(currGrayImg,h);
+    currRefImg = imfilter(currRefImg,h);
+    curr_shifts = GetExpectedShift(currRefImg,currGrayImg,max_shift,tolerance);
+    shifts_matrix(j+1,:) = curr_shifts;
 end
 
 end
