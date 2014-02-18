@@ -26,18 +26,44 @@ function [ ] = hdrtest()
 %     '../Img/Memorial/memorial0073.png', '../Img/Memorial/memorial0074.png', ...
 %     '../Img/Memorial/memorial0075.png', '../Img/Memorial/memorial0076.png'};
 % expTimes = [1/0.03125,1/0.0625, 1/0.125, 1/0.25, 1/0.5, 1, 1/2,1/4,1/8,1/16,1/32,1/64,1/128,1/256,1/512,1/1024];
+%currentImage=imread('../Images/museumHDR/IMG_9495.jpg');
+%imwrite(currentImage,strcat('../Images/museumHDR/srgtest.jpg'));
 
-files = {'../Images/museumHDR/IMG_9495.jpg', '../Images/museumHDR/IMG_9496.jpg', ...
-    '../Images/museumHDR/IMG_9497.jpg'};
-expTimes = [1/4,1/1.6,1];
+  files = {'../Images/museumHDR/IMG_9495.jpg', '../Images/museumHDR/IMG_9496.jpg', ...
+      '../Images/museumHDR/IMG_9497.jpg'};
+ 
+ 
+ 
+% expTimes = [4,1.6,1];
+
+
+ files = {'../Images/museumHDR/IMG_9495edited.tif', '../Images/museumHDR/IMG_9496edited.tif', ...
+     '../Images/museumHDR/IMG_9497edited.tif'};
+%
+files = {'../Images/museumHDR/IMG_8889edited.JPG', '../Images/museumHDR/IMG_8890edited.JPG', ...
+     '../Images/museumHDR/IMG_8891edited.JPG'};
+  
+ 
+ 
+files = {'../Images/museumHDR/IMG_7013edited.JPG','../Images/museumHDR/IMG_7014edited.JPG'};
+ 
+ 
+
+expTimes = double([1/4,1/1.6,1/1])
+% 
+% 
+% files = {'../Images/museumHDR/IMG_9495.jpg', '../Images/museumHDR/IMG_9496.jpg', ...
+%      '../Images/museumHDR/IMG_9497.jpg'};
 
 hdr = makehdr(files);
 
 %hdr = makehdr(files, 'ExposureValues', expTimes );
+%hdr = makehdr(files, 'RelativeExposure', expTimes );
 % %hdr = makehdr(files, 'RelativeExposure', expTimes ./ expTimes(1));
-rgb = tonemap(hdr);
+rgb = tonemap(hdr,'AdjustLightness', [0.1 1], ...
+                   'AdjustSaturation', 3, ...
+                   'NumberOfTiles', [2,2]);
 figure; imshow(rgb);
-figure; imshow(hdr);
 
 end
 
