@@ -18,7 +18,7 @@ function [logExposure,irradiance] = createHDR(pixelArray,logT, smoothness,color)
 
     n = 256;
     p = size(pixelArray,1);    
-    pixelsNecessary = ceil(256 / p)*3;
+    pixelsNecessary = ceil(256 / p)*2;
     A = zeros(p * pixelsNecessary + n + 1, n + pixelsNecessary);    
     b = zeros(size(A,1), 1);
     
