@@ -6,7 +6,7 @@
 % gRed: camera response function for the red color channel
 % gGreen: camera response function for the green color channel
 % gBlue: camera response function for the blue color channel
-function [ hdr ] = createHDRMap( filenames, gRed, gGreen, gBlue, w, dt )
+function [ hdr ] = hdr( filenames, gRed, gGreen, gBlue, w, dt )
 
     numExposures = size(filenames,2);
    
