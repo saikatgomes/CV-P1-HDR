@@ -11,11 +11,10 @@
 % saturation: a value between 0 and 1 defining the desired saturation of
 % the resulting tonemapped image
 %
-function [ ldrPic ] = reinhardGlobal( hdr, a, saturation)
+function [ ldrPic, ldrLuminanceMap ] = reinhardGlobal( hdr, a, saturation)
 
 fprintf('Computing luminance map\n');
-%luminanceMap = makeLuminanceMap(hdr);
-luminanceMap = 0.2125 * hdr(:,:,1) + 0.7154 * hdr(:,:,2) + 0.0721 * hdr(:,:,3);
+luminanceMap = makeLuminanceMap(hdr);
 
 
 numPixels = size(hdr,1) * size(hdr,2);

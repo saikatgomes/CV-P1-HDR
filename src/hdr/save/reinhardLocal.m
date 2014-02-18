@@ -7,13 +7,11 @@
 %
 %
 
-function [ ldrPic ] = reinhardLocal( hdr, saturation, eps, phi )
+function [ ldrPic, luminanceCompressed, v, v1Final, sm ] = reinhardLocal( hdr, saturation, eps, phi )
 
   
     fprintf('Computing luminance map\n');
-    %luminanceMap = makeLuminanceMap(hdr);
-    
-    luminanceMap = 0.2125 * hdr(:,:,1) + 0.7154 * hdr(:,:,2) + 0.0721 * hdr(:,:,3);
+    luminanceMap = makeLuminanceMap(hdr);
 
     alpha = 1 / (2*sqrt(2));
     key = 0.18;
