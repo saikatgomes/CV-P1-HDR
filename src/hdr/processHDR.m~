@@ -1,64 +1,50 @@
-function [  ] = processHDR( directory , LAMDA)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
-    
-    timeStamp=datestr(now,'mm-dd-yyyy-HH-MM-SS-FFF');
-    imwrite(newMap,strcat(directory,'/',imgToneMap));
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 1
+%   Params: directory - relative directory of the *.info file
+%   Returns: name of simple hdr file created
+%--------------------------------------------------------------------------
 
+function [  ] = processHDR( inDir, LAMDA, R_SAT, R_BRIGHT, M_SAT)
+    
+    outDir=strcat(inDir,'HDR_',datestr(now,'mmddyyyy_HHMMSSFFF'));
+    mkdir(outDir);
 
     warning('off','all');
-    saturation = 0.6;
     eps = 0.05;
     phi = 8;
-    a = 0.72;
+    %saturation = 0.6;
+    %a = 0.72;
+    %simple average of pixels
+    aveImg(inDir,outDir);
 
-    [ filenames, exposures, imgCount,numPixels, ...
-        weights, zRed, zGreen, zBlue, sampleIndices ] = ...
-        loadImageData( directory );
+    for l=LAMDA
+    
+        [ fNames, T, imgCount, numPixels, ...
+            wts, pixelsRed, pixelsGreen, pixelsBlue, sampleIndices ] = ...
+            loadImageData(inDir);
 
-    [ B, gRed, gGreen, gBlue] = solveSVD( zRed, zGreen, zBlue, ...
-        imgCount, exposures, LAMDA, weights );
-    
-    hdrMap = createHDRMap( filenames, gRed, gGreen, gBlue, weights, B );
-    [ldrLocal]  = reinhardLocal(hdrMap, saturation, eps, phi);
-    [ldrGlobal] = reinhardGlobal( hdrMap, a, saturation );
-    %rgb = tonemap(hdrMap);
-    
-    
-    for i=[1,2,3,4,5,6,7,8,9,10]
-        rgb = tonemap(hdrMap,'AdjustLightness', [0.1 1], ...
-                   'AdjustSaturation', i, ...
-                   'NumberOfTiles', [25,25]);
-        figure 
-        imshow(rgb);    
-        title(strcat('HDR',i));
+        [ B, g_Red, g_Green, g_Blue] = solveSVD( pixelsRed, pixelsGreen, pixelsBlue, ...
+            imgCount, T, l, wts, outDir);
+
+        hdrMap = createHDRMap( fNames, g_Red, g_Green, g_Blue, wts, B );
+        hdrwrite(hdrMap,strcat(outDir,'/imageHDR-',num2str(l),'.hdr'));
+        for i=M_SAT
+            rgb = tonemap(hdrMap,'AdjustLightness', [0.1 1], ...
+                       'AdjustSaturation', i, ...
+                       'NumberOfTiles', [25,25]);
+            imwrite(rgb,strcat(outDir,'/ToneMap-Matlab-',num2str(i),'-',num2str(l),'.jpg'));  
+        end
+
+        for saturation=R_SAT
+            [ldrLocal]  = reinhardLocalToneMap(hdrMap, saturation, eps, phi);
+            imwrite(ldrLocal,strcat(outDir,'/ToneMap-Local',num2str(saturation*1000),'-',num2str(l),'.jpg'));   
+            for a=R_BRIGHT            
+                [ldrGlobal] = reinhardGlobalToneMap( hdrMap, a, saturation );     
+                imwrite(ldrGlobal,strcat(outDir,'/ToneMap-Global-',num2str(saturation*1000),'-',num2str(a*1000),'-',num2str(l),'.jpg'));
+            end  
+        end      
     end
-%     rgb = tonemap(hdrMap,'AdjustLightness', [0.1 1], ...
-%                    'AdjustSaturation', 2, ...
-%                    'NumberOfTiles', [25,25]);
-%     
-    
-%     figure 
-%     imshow(hdrMap);    
-%     title('HDR');
-%     hdrwrite(hdrMap,strcat(directory,'newHDR.hdr'));
-    
-%     figure 
-%     imshow(rgb);    
-%     title('Matlab Default');
-%         
-%     figure
-%     imshow(ldrGlobal);
-%     title('Reinhard global operator');
-%     figure
-%     imshow(ldrLocal);
-%     title('Reinhard local operator');
-    
-    
-%     imwrite(rgb,strcat(directory,'ToneMap-Matlab.jpg'));    
-%     imwrite(ldrGlobal,strcat(directory,'ToneMap-Global.jpg'));
-%     imwrite(ldrLocal,strcat(directory,'ToneMap-Local.jpg'));
-    
     clear all;
 end
-

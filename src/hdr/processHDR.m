@@ -6,43 +6,43 @@
 %   Returns: name of simple hdr file created
 %--------------------------------------------------------------------------
 
-function [  ] = processHDR( directory , LAMDA, R_saturation, R_brightness,M_saturation)
+function [  ] = processHDR( inDir, LAMDA, R_SAT, R_BRIGHT, M_SAT)
     
-    outputDir=strcat(directory,'HDR_',datestr(now,'mmddyyyy_HHMMSSFFF'));
-    mkdir(outputDir);
+    outDir=strcat(inDir,'HDR_',datestr(now,'mmddyyyy_HHMMSSFFF'));
+    mkdir(outDir);
 
     warning('off','all');
-    %saturation = 0.6;
     eps = 0.05;
     phi = 8;
+    %saturation = 0.6;
     %a = 0.72;
-    
-    aveImg(directory,outputDir);
+    %simple average of pixels
+    aveImg(inDir,outDir);
 
     for l=LAMDA
     
-        [ filenames, exposures, imgCount,numPixels, ...
-            weights, zRed, zGreen, zBlue, sampleIndices ] = ...
-            loadImageData( directory );
+        [ fNames, T, imgCount, numPixels, ...
+            wts, pixelsRed, pixelsGreen, pixelsBlue, sampleIndices ] = ...
+            loadImageData(inDir);
 
-        [ B, gRed, gGreen, gBlue] = solveSVD( zRed, zGreen, zBlue, ...
-            imgCount, exposures, l, weights, outputDir);
+        [ B, g_Red, g_Green, g_Blue] = solveSVD( pixelsRed, pixelsGreen, pixelsBlue, ...
+            imgCount, T, l, wts, outDir);
 
-        hdrMap = createHDRMap( filenames, gRed, gGreen, gBlue, weights, B );
-        hdrwrite(hdrMap,strcat(outputDir,'/imageHDR-',num2str(l),'.hdr'));
-        for i=M_saturation
+        hdrMap = createHDRMap( fNames, g_Red, g_Green, g_Blue, wts, B );
+        hdrwrite(hdrMap,strcat(outDir,'/imageHDR-',num2str(l),'.hdr'));
+        for i=M_SAT
             rgb = tonemap(hdrMap,'AdjustLightness', [0.1 1], ...
                        'AdjustSaturation', i, ...
                        'NumberOfTiles', [25,25]);
-            imwrite(rgb,strcat(outputDir,'/ToneMap-Matlab-',num2str(i),'-',num2str(l),'.jpg'));  
+            imwrite(rgb,strcat(outDir,'/ToneMap-Matlab-',num2str(i),'-',num2str(l),'.jpg'));  
         end
 
-        for saturation=R_saturation
-            [ldrLocal]  = reinhardLocalToneMap(hdrMap, saturation, eps, phi);
-            imwrite(ldrLocal,strcat(outputDir,'/ToneMap-Local',num2str(saturation*1000),'-',num2str(l),'.jpg'));   
-            for a=R_brightness            
-                [ldrGlobal] = reinhardGlobalToneMap( hdrMap, a, saturation );     
-                imwrite(ldrGlobal,strcat(outputDir,'/ToneMap-Global-',num2str(saturation*1000),'-',num2str(a*1000),'-',num2str(l),'.jpg'));
+        for sat=R_SAT
+            [ldrLocal]  = reinhardLocalToneMap(hdrMap, sat, eps, phi);
+            imwrite(ldrLocal,strcat(outDir,'/ToneMap-Local',num2str(sat*1000),'-',num2str(l),'.jpg'));   
+            for bright=R_BRIGHT            
+                [ldrGlobal] = reinhardGlobalToneMap( hdrMap, bright, sat );     
+                imwrite(ldrGlobal,strcat(outDir,'/ToneMap-Global-',num2str(sat*1000),'-',num2str(bright*1000),'-',num2str(l),'.jpg'));
             end  
         end      
     end
