@@ -1,9 +1,0 @@
-id	comparam	RRCombineParamData
-creator	nobody
-numSource	0
-saturationLevel	0.99
-noiseLevel	0.015
-checkIVarianceCriterion	0.0
-trimRatio	0.8
-bestMLuminance	0.7
-selectNeutralColorCriterion	0.02

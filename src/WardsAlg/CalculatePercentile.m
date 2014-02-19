@@ -15,8 +15,8 @@ function [percentile] = CalculatePercentile(img1, img2)
 %assume both images have same amount of pixels
 numpixelstotal = size(img1,1) * size(img1,2) * 2;
 sumPixelsBothPics = sum(img1(:)) + sum(img2(:));
-tooLightCutoff = 0.8 * numpixelstotal * 255;
-tooDarkCutoff = 0.2 * numpixelstotal * 255;
+tooLightCutoff = 0.75 * numpixelstotal * 255;
+tooDarkCutoff = 0.25 * numpixelstotal * 255;
 if sumPixelsBothPics >= tooLightCutoff
     percentile = 17;
 elseif sumPixelsBothPics <= tooDarkCutoff

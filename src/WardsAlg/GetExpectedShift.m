@@ -33,8 +33,11 @@ end
 percentile = CalculatePercentile(referenceImg, img2);
 [tb1, eb1] = ComputeBitmaps(referenceImg, tolerance,percentile);
 [tb2, eb2] = ComputeBitmaps(img2, tolerance,percentile);
+<<<<<<< HEAD
 imwrite(tb1,strcat('Dataset/bitmaps/map1_',num2str(max_shift),'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
 imwrite(tb2,strcat('Dataset/bitmaps/map2_',num2str(max_shift),'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
+=======
+>>>>>>> 1472cc83ac6ae1e0108f775ad2e98948b0ca4081
 min_error = size(img2,1) * size(img2,2);
 for i = -1:1
     for j = -1:1
