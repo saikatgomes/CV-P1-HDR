@@ -51,14 +51,9 @@
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 
-In simple terms, HDR imaging consists of taking a series of images of a static scene at varying exposures, and merging the best portions of each image in order to maximize the dynamic range for a photo of the scene.  In order to construct HDR images, we implemented the algorithm that Debevec and Malik (1997) introduced along with the tone mapping algorithm described by Reinhard et. al.  We also implemented Ward’s alignment algorithm in order to handle the common problem of misaligned photos. 
+<h2> <center> Running the Code </center> </h2>
  
-Summary Of Findings
- 
-1)   We compared HDR images that we produced with those standard methods to what we call naïve HDR images, which are constructed by taking the average value of each pixel from all of the images used for HDR.  We found that the naïve HDR image did contain a high range of colors, but that those colors ended up being quite dull compared to images produced from standard HDR methods. 
-2)   We also experiment with different tone mapping algorithms.  We compared images between Matlab’s tone mapping algorithm, and our implementations of Reinhard et al.’s local algorithm, and Reinhard et al.’s global algorithm.  We found that Matlab’s tone mapping generally gave better results than the Reinhard tone mapping algorithms.  However, at times, Reinhard’s tone mapping algorithm gave a much more realistic looking image than that of Matlab.
-3)   We discovered that using Ward’s algorithm gave much better results when we put the images through an edge filter beforehand (we used the Prewitt edge filter).  Without using the edge filter, there was much more noise and the algorithm would return much larger faulty shifts for images. 
- 
+In order to run our HDR algorithm without using Ward's algorithm, all you have to do is call the <i>main</i> function in the folder "<i>src/hdr/</i>" and pass in parameter values for the directory in which the images are located, and a lamda value for the level of smoothing.  In the directory where the images are located, there should be a file with the extension <i>.info</i> in which the first line contains the number of images, and the remaining lines contain the name of each image along with its shutter speed (<a href = "img/infoFile/museum.info"> see example here</a>).  The main function will show as well as write images using the Matlab tone mapping function, Reinhard's local tone mapping function, and Reinhard's global tone mapping function.  In order use our Ward's algorithm implementation, you must call the <i>WardMain</i> function in the folder "<i>src/WardsAlg/</i>" and pass in a directory where the images and <i>.info</i> file are located.  The WardMain function will write new images that have been shifted and cropped based on the output of Ward's algorithm with and without using an edge filter.  The location of these output images are "<i>src/WardsAlg/Dataset/outputEdgeFilter/</i>" for the edge filtered images, and "<i>src/WardsAlg/Dataset/outputNoFilter/</i>" for the non-filtered images.
 
 
 
