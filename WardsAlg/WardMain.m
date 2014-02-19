@@ -13,8 +13,6 @@ function [] = WardMain(directory)
 ref_index = 1;
 max_shift = 5; % 5 is standard so go up to max of +- 64 pixel shift
 tolerance = 2;
-max_shift = 7;
-tolerance = 4;
 
 [pixArray,exposures,filenames] = readImages(directory);
 
