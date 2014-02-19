@@ -11,7 +11,7 @@ function [] = WardMain(directory)
 %--------------------------------------------------------------------------
 
 ref_index = 1;
-max_shift = 3;
+max_shift = 2;
 tolerance = 4;
 LAMDA = 50;
 
