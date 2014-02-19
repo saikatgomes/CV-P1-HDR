@@ -1,4 +1,4 @@
-function [shifts_matrix] = GetAllShiftsWardAlg(pixArray,ref_index, max_shift, tolerance)
+function [shifts_matrix] = GetAllShiftsWardAlg(pixArray,ref_index, max_shift, tolerance,shouldFilter)
 %  GetAllShiftsWardAlg - get all the x and y shift positions for all images
 %                        relative to last image i.e. reference image
 %--------------------------------------------------------------------------
@@ -10,6 +10,7 @@ function [shifts_matrix] = GetAllShiftsWardAlg(pixArray,ref_index, max_shift, to
 %           max_shift - the estimated maximum shift in bits necessary
 %           tolerance - the distance from median value used to compute
 %                       exclusion bitmaps
+%           shouldFilter - 1 to use edge filter, 0 if not
 %
 %   Return: shifts_matrix - a 2-d matrix with number of rows equal to the 
 %                           number of images and 2 columns.  The
@@ -45,10 +46,12 @@ for i = 1:ref_index
     end
     currGrayImg = GetGrayImage(pixArray(i,:,:,:));
     currRefImg = GetGrayImage(pixArray(i + 1,:,:,:));
-    % filter to emphasize edges before estimating the shift
-    h = fspecial('prewitt');
-    currGrayImg = imfilter(currGrayImg,h);
-    currRefImg = imfilter(currRefImg,h);
+    if (shouldFilter == 1)
+        % filter to emphasize edges before estimating the shift
+        h = fspecial('prewitt');
+        currGrayImg = imfilter(currGrayImg,h);
+        currRefImg = imfilter(currRefImg,h);
+    end
     curr_shifts = GetExpectedShift(currRefImg,currGrayImg,max_shift,tolerance);
     shifts_matrix(i,:) = curr_shifts;
 end
@@ -59,10 +62,12 @@ for j = ref_index:numphotos
     end
     currGrayImg = GetGrayImage(pixArray(j + 1,:,:,:));
     currRefImg = GetGrayImage(pixArray(j,:,:,:));
-    % filter to emphasize edges before estimating the shift
-    h = fspecial('prewitt');
-    currGrayImg = imfilter(currGrayImg,h);
-    currRefImg = imfilter(currRefImg,h);
+    if (shouldFilter == 1)
+        % filter to emphasize edges before estimating the shift
+        h = fspecial('prewitt');
+        currGrayImg = imfilter(currGrayImg,h);
+        currRefImg = imfilter(currRefImg,h);
+    end
     curr_shifts = GetExpectedShift(currRefImg,currGrayImg,max_shift,tolerance);
     shifts_matrix(j+1,:) = curr_shifts;
 end
