@@ -38,8 +38,7 @@
 			    <li><a href="rgtm.html">Reinhard's Global Tone Mapping</a></li>
 			    <li><a href="wards.html">Ward's Algorithm</a></li>
 			  </ol>
-			  <li><a href="results.html">Results Comparison 1</a></li>
-			  <li><a href="results2.html">Results Comparison 2</a></li>
+			  <li><a href="results.html">Results</a></li>
 			  <li><a href="dataset.html">Datasets</a></li>
 			  <li><a href="code.html">Code</a></li>
 			  <li><a href="https://github.com/saikatgomes/CV-P1-HDR/commits/master" target="_blank">Git Logs<a></li>
@@ -51,14 +50,45 @@
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 
-
-<h2>Image Acquisition</h2>
-The images were take with a Canon EOS 550D camera.</br>
-The *.CR2 files were converted to *.jpg format using <a href="http://www.adobe.com/products/photoshop.html">Adobe Photoshop</a>.</br></br>
-
-<img src="http://www.imaging-resource.com/PRODS/T2I/ZURTOP.JPG" height='500'>
+Once the *.hdr file was created matlab's inbuilt tonemapping operator was applied with diffrent saturation parametrs to obtain tonemaps.
+Below are some of the results on the data sets.
  
-
+<hr>				
+				<table>
+					<tr align=center>
+						<td>
+							<img src="img/ToneMap-Matlab-1-100.jpg" width="485"></br>
+							<font color="ffffff">
+							Saturation=1, Smoothness=100
+							</font>
+						</td>
+						<td>
+							<img src="img/ToneMap-Matlab-6-100.jpg" width="485"></br>
+							<font color="ffffff">
+							Saturation=6, Smoothness=100
+							</font>
+						</td>
+					</tr>
+					<tr>
+						<td colspan=2>
+							<hr>
+						</td>
+					</tr>
+					<tr align=center>
+						<td>
+							<img src="img/ToneMap-Matlab-1-50.jpg" width="485"></br>
+							<font color="ffffff">
+							Saturation=1, Smoothness=50
+							</font>
+						</td>
+						<td>
+							<img src="img/ToneMap-Matlab-3-150.jpg" width="485"></br>
+							<font color="ffffff">
+							Saturation=3, Smoothness=150
+							</font>
+						</td>
+					</tr>
+				</table>
 
 
 			</font>

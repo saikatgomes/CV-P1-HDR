@@ -33,6 +33,7 @@
 			    <li><a href="imgAcc.html">Image Acquisition</a></li>
 			    <li><a href="simple.html">Simple Pixel Averaging</a></li>
 			    <li><a href="rc.html">Response Curves</a></li>
+			    <li><a href="tonemap.html">Tone Mapping (Matlab)</a></li>
 			    <li><a href="rltm.html">Reinhard's Local Tone Mapping</a></li>
 			    <li><a href="rgtm.html">Reinhard's Global Tone Mapping</a></li>
 			    <li><a href="wards.html">Ward's Algorithm</a></li>
@@ -52,7 +53,7 @@
 
 <h2>Image Acquisition</h2>
 The images were take with a Canon EOS 550D camera.</br>
-The *.CR2 files were converted to *.jpg format using Adobe Photoshop.</br></br>
+The *.CR2 files were converted to *.jpg format using <a href="http://www.adobe.com/products/photoshop.html">Adobe Photoshop</a>.</br></br>
 
 <img src="http://www.imaging-resource.com/PRODS/T2I/ZURTOP.JPG" height='500'>
  

@@ -27,8 +27,8 @@
 			<h2>Contents</h2>
 			<ol type="0">
 			  <li><a href="../index.html">Home</a></li>
-			  <li><a href="intro.html">Introduction</li>
-			  <li>Implementation</a></li>
+			  <li><a href="intro.html">Introduction</a></li>
+			  <li><a href="implement.html">Implementation</a></li>
 			  <ol type="1">
 			    <li><a href="imgAcc.html">Image Acquisition</a></li>
 			    <li><a href="simple.html">Simple Pixel Averaging</a></li>
@@ -50,16 +50,61 @@
 		<td align=left>
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
+<table>
+	<tr valign='bottom'>
+		<td>
+			<img src="img/img2.JPG" width="235"></br>
+				<font color="ffffff">
+				Original Image 1
+				</font>
+		</td>
 
+		<td>
+			<img src="img/img1.JPG" width="235"></br>
+				<font color="ffffff">
+				Original Image 2
+				</font>
+		</td>
 
-<h2>Image Acquisition</h2>
-The images were take with a Canon EOS 550D camera.</br>
-The *.CR2 files were converted to *.jpg format using <a href="http://www.adobe.com/products/photoshop.html">Adobe Photoshop</a>.</br></br>
+		<td>
+			<img src="img/img3.JPG" width="235"></br>
+				<font color="ffffff">
+				Original Image 3
+				</font>
+		</td>
 
-<img src="http://www.imaging-resource.com/PRODS/T2I/ZURTOP.JPG" height='500'>
- 
+		<td>
+			<img src="img/aveFarm.jpg" width="235"></br>
+				<font color="ffffff">
+				Average Pixel Value Image
+				</font>
+		</td>
 
+	</tr>
+	<tr valign='bottom'>
+		<td rowspan=2 colspan=3>
+			<img src="img/ToneMap-Matlab-9-100.jpg" width="715"></br>
+				<font color="ffffff">
+				Tonemapped Image (matlab)
+				</font>
+		</td>
+		<td>
+			<img src="img/ToneMap-Local1200-50.jpg" width="235"></br>
+				<font color="ffffff">
+				Reinhard's Local Tone Map
+				</font>
+		</td>
 
+	</tr>
+	<tr valign='bottom'>
+		<td>
+			<img src="img/ToneMap-Global-1100-1100-50.jpg" width="235"></br>
+				<font color="ffffff">
+				Reinhard's Global Tone Map
+				</font>
+		</td>
+	</tr>
+</table>
 
 			</font>
 

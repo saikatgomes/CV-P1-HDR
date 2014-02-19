@@ -33,6 +33,7 @@
 			    <li><a href="imgAcc.html">Image Acquisition</a></li>
 			    <li><a href="simple.html">Simple Pixel Averaging</a></li>
 			    <li><a href="rc.html">Response Curves</a></li>
+			    <li><a href="tonemap.html">Tone Mapping (Matlab)</a></li>
 			    <li><a href="rltm.html">Reinhard's Local Tone Mapping</a></li>
 			    <li><a href="rgtm.html">Reinhard's Global Tone Mapping</a></li>
 			    <li><a href="wards.html">Ward's Algorithm</a></li>
@@ -86,7 +87,7 @@ Below are recovered response curves from 2 sets of images on the same camera wit
 						<td>
 							<center>
 							<font color="ffffff">
-								Image Set 1</br>
+								Image Set 2</br>
 							</font>
 							<img src="img/IMG_9495.jpg" height="75"></br>
 							<img src="img/IMG_9496.jpg" height="75"></br>

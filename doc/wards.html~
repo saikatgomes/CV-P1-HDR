@@ -22,7 +22,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td width='315' alight=left>
+		<td width='315' alight=left  valign=top>
 			<font color="ffffff">
 			<h2>Contents</h2>
 			<ol type="0">
@@ -33,6 +33,7 @@
 			    <li><a href="imgAcc.html">Image Acquisition</a></li>
 			    <li><a href="simple.html">Simple Pixel Averaging</a></li>
 			    <li><a href="rc.html">Response Curves</a></li>
+			    <li><a href="tonemap.html">Tone Mapping (Matlab)</a></li>
 			    <li><a href="rltm.html">Reinhard's Local Tone Mapping</a></li>
 			    <li><a href="rgtm.html">Reinhard's Global Tone Mapping</a></li>
 			    <li><a href="wards.html">Ward's Algorithm</a></li>
@@ -49,13 +50,21 @@
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 
-In simple terms, HDR imaging consists of taking a series of images of a static scene at varying exposures, and merging the best portions of each image in order to maximize the dynamic range for a photo of the scene.  In order to construct HDR images, we implemented the algorithm that Debevec and Malik (1997) introduced along with the tone mapping algorithm described by Reinhard et. al.  We also implemented Ward’s alignment algorithm in order to handle the common problem of misaligned photos. 
+Wards Algorithm
  
-Summary Of Findings
+As creating HDR images requires taking pictures with various exposures, one possible issue that can arise is some movement in the camera between photos.  This would cause some of the pixels in the images to be misaligned and can possibly harm the HDR results.  Therefore, author Greg Ward (Ward, 2003) proposed a solution to this problem by describing a method that can be used to align images for better HDR results.  The method involves creating bitmaps of the images to be aligned, filtering them down by factors of two (as shown below), and then greedily searching for the alignment that minimizes the difference between images.
  
-1)   We compared HDR images that we produced with those standard methods to what we call naïve HDR images, which are constructed by taking the average value of each pixel from all of the images used for HDR.  We found that the naïve HDR image did contain a high range of colors, but that those colors ended up being quite dull compared to images produced from standard HDR methods. 
-2)   We also experiment with different tone mapping algorithms.  We compared images between Matlab’s tone mapping algorithm, and our implementations of Reinhard et al.’s local algorithm, and Reinhard et al.’s global algorithm.  We found that Matlab’s tone mapping generally gave better results than the Reinhard tone mapping algorithms.  However, at times, Reinhard’s tone mapping algorithm gave a much more realistic looking image than that of Matlab.
-3)   We discovered that using Ward’s algorithm gave much better results when we put the images through an edge filter beforehand (we used the Prewitt edge filter).  Without using the edge filter, there was much more noise and the algorithm would return much larger faulty shifts for images. 
+CV-P1-HDR/src/WardsAlg/Dataset/bitmaps/noFilterBuildingsOne
+ 
+ 
+In addition to implementing Ward’s standard method, we also improved upon his method by putting the images through an edge filter before running the algorithm.  In order to test Ward’s algorithm, we used our same HDR image set that contains 3 images but shifted the images by varying amounts.  Examples of images with descriptions are shown below.
+ 
+ 
+     	1 image of Wards without filter and 1 image of Ward’s with filter…include description on how the images were misaligned as we used 3 images for HDR and moved 1 image 10 pixels to the left, and another 10 pixels to the right…can also be drastic and put 40 to the left and 40 to the right…1 image without wards at all
+ 
+In comparing the two versions of Ward’s algorithm (with and without an edge filter), we found that Ward’s algorithm performed much better when using an edge filter beforehand.  Two main parameters in the Ward’s algorithm are the maximum amount of bits that you allow the images to be shifted, as well as the noise tolerance.  In particular, without using an edge filter, the algorithm was much more likely to produce extremely large (and faulty) image shifts as we increased either/both parameter values.  We found that using an edge filter improved results for all conditions.  Also, as we can see above, WITHOUT USING WARDS ALGORITHM HOPEFULLY IS WORSE QUALITY THAN WITH EDGE FILTER
+ 
+
  
 
 

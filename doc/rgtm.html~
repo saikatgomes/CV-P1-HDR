@@ -22,7 +22,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td width='315' alight=left>
+		<td width='315' alight=left valign=top>
 			<font color="ffffff">
 			<h2>Contents</h2>
 			<ol type="0">
@@ -33,6 +33,7 @@
 			    <li><a href="imgAcc.html">Image Acquisition</a></li>
 			    <li><a href="simple.html">Simple Pixel Averaging</a></li>
 			    <li><a href="rc.html">Response Curves</a></li>
+			    <li><a href="tonemap.html">Tone Mapping (Matlab)</a></li>
 			    <li><a href="rltm.html">Reinhard's Local Tone Mapping</a></li>
 			    <li><a href="rgtm.html">Reinhard's Global Tone Mapping</a></li>
 			    <li><a href="wards.html">Ward's Algorithm</a></li>
@@ -49,19 +50,48 @@
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 
-In simple terms, HDR imaging consists of taking a series of images of a static scene at varying exposures, and merging the best portions of each image in order to maximize the dynamic range for a photo of the scene.  In order to construct HDR images, we implemented the algorithm that Debevec and Malik (1997) introduced along with the tone mapping algorithm described by Reinhard et. al.  We also implemented Ward’s alignment algorithm in order to handle the common problem of misaligned photos. 
+Once the *.hdr file was created Reinhard's Global tonemapping operator was implemented (see code) and applied with diffrent saturation parametrs to obtain tonemaps.
+Below are some of the results on the data sets.
  
-Summary Of Findings
- 
-1)   We compared HDR images that we produced with those standard methods to what we call naïve HDR images, which are constructed by taking the average value of each pixel from all of the images used for HDR.  We found that the naïve HDR image did contain a high range of colors, but that those colors ended up being quite dull compared to images produced from standard HDR methods. 
-2)   We also experiment with different tone mapping algorithms.  We compared images between Matlab’s tone mapping algorithm, and our implementations of Reinhard et al.’s local algorithm, and Reinhard et al.’s global algorithm.  We found that Matlab’s tone mapping generally gave better results than the Reinhard tone mapping algorithms.  However, at times, Reinhard’s tone mapping algorithm gave a much more realistic looking image than that of Matlab.
-3)   We discovered that using Ward’s algorithm gave much better results when we put the images through an edge filter beforehand (we used the Prewitt edge filter).  Without using the edge filter, there was much more noise and the algorithm would return much larger faulty shifts for images. 
- 
-
+<hr>				
+				<table>
+					<tr align=center>
+						<td>
+							<img src="img/ToneMap-Global-800-900-100.jpg" width="485"></br>
+							<font color="ffffff">
+							Saturation=.8, Brightness=.9, Smoothness=100
+							</font>
+						</td>
+						<td>
+							<img src="img/ToneMap-Global-1500-1100-150.jpg" width="485"></br>
+							<font color="ffffff">
+							Saturation=1.5, Brightness=1.1,Smoothness=150
+							</font>
+						</td>
+					</tr>
+					<tr>
+						<td colspan=2>
+							<hr>
+						</td>
+					</tr>
+					<tr align=center>
+						<td>
+							<img src="img/ToneMap-Global-600-900-100.jpg" width="485"></br>
+							<font color="ffffff">
+							Saturation=.6, Brightness=.9,Smoothness=100
+							</font>
+						</td>
+						<td>
+							<img src="img/ToneMap-Global-1100-1100-50.jpg" width="485"></br>
+							<font color="ffffff">
+							Saturation=1.1, Brightness=1.1,Smoothness=50
+							</font>
+						</td>
+					</tr>
+				</table>
 
 
 			</font>
-
 	<!-- #### DISPLAY AREA ### -->			
 		</td>
 	</tr>

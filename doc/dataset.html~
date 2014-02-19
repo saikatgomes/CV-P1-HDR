@@ -22,7 +22,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td width='315' alight=left>
+		<td width='315' alight=left valign=top>
 			<font color="ffffff">
 			<h2>Contents</h2>
 			<ol type="0">
@@ -33,11 +33,13 @@
 			    <li><a href="imgAcc.html">Image Acquisition</a></li>
 			    <li><a href="simple.html">Simple Pixel Averaging</a></li>
 			    <li><a href="rc.html">Response Curves</a></li>
+			    <li><a href="tonemap.html">Tone Mapping (Matlab)</a></li>
 			    <li><a href="rltm.html">Reinhard's Local Tone Mapping</a></li>
 			    <li><a href="rgtm.html">Reinhard's Global Tone Mapping</a></li>
 			    <li><a href="wards.html">Ward's Algorithm</a></li>
 			  </ol>
-			  <li><a href="results.html">Results</a></li>
+			  <li><a href="results.html">Results Comparison 1</a></li>
+			  <li><a href="results2.html">Results Comparison 2</a></li>
 			  <li>Datasets</li>
 			  <li><a href="code.html">Code</a></li>
 			  <li><a href="https://github.com/saikatgomes/CV-P1-HDR/commits/master" target="_blank">Git Logs<a></li>
@@ -49,16 +51,85 @@
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 
-In simple terms, HDR imaging consists of taking a series of images of a static scene at varying exposures, and merging the best portions of each image in order to maximize the dynamic range for a photo of the scene.  In order to construct HDR images, we implemented the algorithm that Debevec and Malik (1997) introduced along with the tone mapping algorithm described by Reinhard et. al.  We also implemented Ward’s alignment algorithm in order to handle the common problem of misaligned photos. 
- 
-Summary Of Findings
- 
-1)   We compared HDR images that we produced with those standard methods to what we call naïve HDR images, which are constructed by taking the average value of each pixel from all of the images used for HDR.  We found that the naïve HDR image did contain a high range of colors, but that those colors ended up being quite dull compared to images produced from standard HDR methods. 
-2)   We also experiment with different tone mapping algorithms.  We compared images between Matlab’s tone mapping algorithm, and our implementations of Reinhard et al.’s local algorithm, and Reinhard et al.’s global algorithm.  We found that Matlab’s tone mapping generally gave better results than the Reinhard tone mapping algorithms.  However, at times, Reinhard’s tone mapping algorithm gave a much more realistic looking image than that of Matlab.
-3)   We discovered that using Ward’s algorithm gave much better results when we put the images through an edge filter beforehand (we used the Prewitt edge filter).  Without using the edge filter, there was much more noise and the algorithm would return much larger faulty shifts for images. 
- 
+				<table>
+					<tr>
+						<td>
+							<a href="img/img2.JPG" target="_blank"><img src="img/img2.JPG" width="325"></a></br>
+							<font color="ffffff">
+							<h2>Original Image 1</h2>
+
+							Exposure Time: 1/1600 sec.</br>
+							Aperture Value: 8.00 EV (f/16.0)</br>
+							ISO Speed Rating: 400</br>
+							Focal Length: 32.0 mm</br>
 
 
+							</font>
+						</td>
+						<td>
+							<img src="img/img1.JPG" width="325"></br>
+							<font color="ffffff">
+							<h2>Original Image 2</h2>
+
+							Exposure Time: 1/400 sec.</br>
+							Aperture Value: 8.00 EV (f/16.0)</br>
+							ISO Speed Rating: 400</br>
+							Focal Length: 32.0 mm</br>
+
+							</font>
+						</td>
+						<td>
+							<img src="img/img3.JPG" width="325"></br>
+							<font color="ffffff">
+							<h2>Original Image 3</h2>
+
+							Exposure Time: 1/100 sec.</br>
+							Aperture Value: 8.00 EV (f/16.0)</br>
+							ISO Speed Rating: 400</br>
+							Focal Length: 32.0 mm</br>
+
+							</font>
+						</td>
+					</tr>
+					<tr>
+						<td colspan=3>
+							<hr>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img src="img/IMG_9495.jpg" width="325"></br>
+							<font color="ffffff">
+							<h2>Original Image 1</h2>
+							Exposure Time: 4 sec.</br>
+							Aperture Value: 8.92 EV (f/22.0)</br>
+							ISO Speed Rating: 100</br>
+							Focal Length: 15.0 mm</br>
+							</font>
+						</td>
+						<td>
+							<img src="img/IMG_9496.jpg" width="325"></br>
+							<font color="ffffff">
+							<h2>Original Image 2</h2>
+							Exposure Time: 1 sec.</br>
+							Aperture Value: 8.92 EV (f/22.0)</br>
+							ISO Speed Rating: 100</br>
+							Focal Length: 15.0 mm</br>
+							</font>
+						</td>
+						<td>
+							<img src="img/IMG_9497.jpg" width="325"></br>
+							<font color="ffffff">
+							<h2>Original Image 3</h2>	
+							Exposure Time: 1 sec.</br>
+							Aperture Value: 8.92 EV (f/22.0)</br>
+							ISO Speed Rating: 100</br>
+							Focal Length: 15.0 mm</br>
+
+							</font>
+						</td>
+					</tr>
+				</table>
 
 			</font>
 
