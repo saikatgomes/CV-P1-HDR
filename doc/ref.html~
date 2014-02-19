@@ -1,0 +1,74 @@
+<html>
+<head>
+</head>
+
+<!-- INTRO -->
+
+<body bgcolor="#000000">
+<center>
+<table width=1300 >
+	<tr align=center>
+		<td colspan=2>
+			<font color="ffffff">	
+			<h1><b>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</b></h1>
+			<i>Saikat R. Gomes (<a href="mailto=saikat@cs.wisc.edu">saikat@cs.wisc.edu</a>) & Stephen Lazzaro (<a href="mailto=slazzaro@cs.wisc.edu">slazzaro@cs.wisc.edu</a>)</i>
+			</font>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2>
+			</br>
+			<hr>
+		</td>
+	</tr>
+	<tr>
+		<td width='315' alight=left>
+			<font color="ffffff">
+			<h2>Contents</h2>
+			<ol type="0">
+			  <li><a href="../index.html">Home</a></li>
+			  <li><a href="intro.html">Introduction</a></li>
+			  <li><a href="implement.html">Implementation</a></li>
+			  <ol type="1">
+			    <li>Image Acquisition</li>
+			    <li>Simple Pixel Averaging</li>
+			    <li>Response Curves</li>
+			    <li>Reinhard's Local Tone Mapping</li>
+			    <li>Reinhard's Global Tone Mapping</li>
+			    <li>Ward's Algorithm</li>
+			  </ol>
+			  <li><a href="results.html">Results</a></li>
+			  <li><a href="dataset.html">Datasets</a></li>
+			  <li><a href="code.html">Code</a></li>
+			  <li><a href="https://github.com/saikatgomes/CV-P1-HDR/commits/master" target="_blank">Git Logs<a></li>
+			  <li>References</li>
+			</ol>
+			</font>
+		</td>
+		<td align=left>
+	<!-- #### DISPLAY AREA ### -->
+			<font color="ffffff">
+
+
+
+ 
+
+
+
+			</font>
+
+	<!-- #### DISPLAY AREA ### -->			
+		</td>
+	</tr>
+	<tr align=center>
+		<td colspan=2>
+			<hr>
+			</br>
+		</td>
+
+	<tr>
+
+</table>
+</center>
+<body>
+</html>

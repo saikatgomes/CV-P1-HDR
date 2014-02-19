@@ -1,0 +1,79 @@
+<html>
+<head>
+</head>
+
+<!-- INTRO -->
+
+<body bgcolor="#000000">
+<center>
+<table width=1300 >
+	<tr align=center>
+		<td colspan=2>
+			<font color="ffffff">	
+			<h1><b>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</b></h1>
+			<i>Saikat R. Gomes (<a href="mailto=saikat@cs.wisc.edu">saikat@cs.wisc.edu</a>) & Stephen Lazzaro (<a href="mailto=slazzaro@cs.wisc.edu">slazzaro@cs.wisc.edu</a>)</i>
+			</font>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2>
+			</br>
+			<hr>
+		</td>
+	</tr>
+	<tr>
+		<td width='315' alight=left>
+			<font color="ffffff">
+			<h2>Contents</h2>
+			<ol type="0">
+			  <li><a href="../index.html">Home</a></li>
+			  <li><a href="intro.html">Introduction</a></li>
+			  <li><a href="implement.html">Implementation</a></li>
+			  <ol type="1">
+			    <li><a href="imgAcc.html">Image Acquisition</a></li>
+			    <li><a href="simple.html">Simple Pixel Averaging</a></li>
+			    <li><a href="rc.html">Response Curves</a></li>
+			    <li><a href="rltm.html">Reinhard's Local Tone Mapping</a></li>
+			    <li><a href="rgtm.html">Reinhard's Global Tone Mapping</a></li>
+			    <li><a href="wards.html">Ward's Algorithm</a></li>
+			  </ol>
+			  <li><a href="results.html">Results</a></li>
+			  <li><a href="dataset.html">Datasets</a></li>
+			  <li>Code</li>
+			  <li><a href="https://github.com/saikatgomes/CV-P1-HDR/commits/master" target="_blank">Git Logs<a></li>
+			  <li><a href="ref.html">References</a></li>
+			</ol>
+			</font>
+		</td>
+		<td align=left>
+	<!-- #### DISPLAY AREA ### -->
+			<font color="ffffff">
+
+In simple terms, HDR imaging consists of taking a series of images of a static scene at varying exposures, and merging the best portions of each image in order to maximize the dynamic range for a photo of the scene.  In order to construct HDR images, we implemented the algorithm that Debevec and Malik (1997) introduced along with the tone mapping algorithm described by Reinhard et. al.  We also implemented Ward’s alignment algorithm in order to handle the common problem of misaligned photos. 
+ 
+Summary Of Findings
+ 
+1)   We compared HDR images that we produced with those standard methods to what we call naïve HDR images, which are constructed by taking the average value of each pixel from all of the images used for HDR.  We found that the naïve HDR image did contain a high range of colors, but that those colors ended up being quite dull compared to images produced from standard HDR methods. 
+2)   We also experiment with different tone mapping algorithms.  We compared images between Matlab’s tone mapping algorithm, and our implementations of Reinhard et al.’s local algorithm, and Reinhard et al.’s global algorithm.  We found that Matlab’s tone mapping generally gave better results than the Reinhard tone mapping algorithms.  However, at times, Reinhard’s tone mapping algorithm gave a much more realistic looking image than that of Matlab.
+3)   We discovered that using Ward’s algorithm gave much better results when we put the images through an edge filter beforehand (we used the Prewitt edge filter).  Without using the edge filter, there was much more noise and the algorithm would return much larger faulty shifts for images. 
+ 
+
+
+
+			</font>
+
+	<!-- #### DISPLAY AREA ### -->			
+		</td>
+	</tr>
+	<tr align=center>
+		<td colspan=2>
+			<hr>
+			</br>
+		</td>
+
+	<tr>
+
+</table>
+</center>
+<body>
+</html>
