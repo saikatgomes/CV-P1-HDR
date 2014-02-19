@@ -11,8 +11,8 @@ function [] = WardMain(directory)
 %--------------------------------------------------------------------------
 
 ref_index = 1;
-max_shift = 6;
-tolerance = 4;
+max_shift = 5; % 5 is standard so go up to max of +- 64 pixel shift
+tolerance = 2;
 LAMDA = 50;
 
 [pixArray,exposures,filenames] = readImages(directory);
@@ -26,7 +26,13 @@ pixArrayShiftedNoFilter = ShiftPixelsAndCrop(shiftsNoFilter,pixArray);
 
 picture = zeros(size(pixArrayShiftedNoFilter,2), size(pixArrayShiftedNoFilter,3), 3);
 for i = 1:size(pixArrayShiftedNoFilter,1)
-    picture(:,:,:) = pixArrayShiftedNoFilter(i,:,:,:);
+    for row = 1:size(pixArrayShiftedNoFilter,2)
+        for column = size(pixArrayShiftedNoFilter,3)
+            for color = 1:3
+                picture(row,column,color) = pixArrayShiftedNoFilter(i,row,column,color);
+            end
+        end
+    end
     imwrite(picture,strcat('Dataset/outputNoFilter/img_nofilter_',i,'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
 end
 
@@ -37,8 +43,15 @@ display('Shifts Filter');
 display(shiftsFilter);
 pixArrayShiftedFilter = ShiftPixelsAndCrop(shiftsFilter,pixArray);
 
+picture = zeros(size(pixArrayShiftedFilter,2), size(pixArrayShiftedFilter,3), 3);
 for i = 1:size(pixArrayShiftedFilter,1)
-    picture(:,:,:) = pixArrayShiftedFilter(i,:,:,:);
+    for row = 1:size(pixArrayShiftedFilter,2)
+        for column = size(pixArrayShiftedFilter,3)
+            for color = 1:3
+                picture(row,column,color) = pixArrayShiftedFilter(i,row,column,color);
+            end
+        end
+    end
     imwrite(picture,strcat('Dataset/outputEdgeFilter/img_filter_',i,'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
 end
 
