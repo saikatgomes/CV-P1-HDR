@@ -36,4 +36,4 @@ function [g]=gsolve(Z,B,l,w)
     for i = 1:256
         a(i,1) = i;
     end
-    figure; plot(a,g);
+    %figure; plot(a,g);

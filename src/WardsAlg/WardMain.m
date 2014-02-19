@@ -8,21 +8,37 @@ function [] = WardMain(directory)
 %   CS 766 - Assignment 1
 %   Params: directory - relative directory of the *.info file and images
 %
-%   Return: 
 %--------------------------------------------------------------------------
 
 ref_index = 1;
 max_shift = 3;
 tolerance = 4;
-shouldFilter = 1;
 LAMDA = 50;
 
 [pixArray,exposures,filenames] = readImages(directory);
-shifts = GetAllShiftsWardAlg(pixArray, ref_index, max_shift, tolerance, shouldFilter);
-pixArrayShifted = ShiftPixelsAndCrop(shifts,pixArray);
+
+%%%% USE WARDS ALIGMENT BEFORE HDR WITHOUT FILTER %%%%
+
+shiftsNoFilter = GetAllShiftsWardAlg(pixArray, ref_index, max_shift, tolerance, 0);
+pixArrayShifted = ShiftPixelsAndCrop(shiftsNoFilter,pixArray);
 
 addpath ./createHDR
 processHDRWards(pixArrayShifted,exposures,filenames,LAMDA);
+rmpath ./createHDR
+
+%%%% USE WARDS ALIGMENT BEFORE HDR WITH FILTER %%%%
+
+shiftsFilter = GetAllShiftsWardAlg(pixArray, ref_index, max_shift, tolerance, 1);
+pixArrayShifted = ShiftPixelsAndCrop(shiftsFilter,pixArray);
+
+addpath ./createHDR
+processHDRWards(pixArrayShifted,exposures,filenames,LAMDA);
+rmpath ./createHDR
+
+%%%% NORMAL HDR %%%%
+
+addpath ./createHDR
+processHDRWards(pixArray,exposures,filenames,LAMDA);
 rmpath ./createHDR
 
 end
