@@ -5,52 +5,43 @@
 %   Params: directory - relative directory of the *.info file
 %   Returns: name of simple hdr file created
 %--------------------------------------------------------------------------
+function [B,gR,gG,gB] = solveSVD(pixR,pixG,pixB,imgCount,T,l,wts,outputDir)
 
-
-function [ B ,gRed, gGreen, gBlue] = solveSVD( zRed, zGreen, zBlue, imgCount, exposures, LAMDA, weights , outputDir)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
-
-    B = zeros(size(zRed,1)*size(zRed,2), imgCount);
-
-    fprintf('Creating exposures matrix B\n')
+    B = zeros(size(pixR,1)*size(pixR,2), imgCount);
     for i = 1:imgCount
-        B(:,i) = log(exposures(i));
+        B(:,i) = log(T(i));
     end
     
     % solve the system for each color channel
-    [gRed]=gsolve(zRed, B, LAMDA, weights);
-    [gGreen]=gsolve(zGreen, B, LAMDA, weights);
-    [gBlue]=gsolve(zBlue, B, LAMDA, weights);
+    [gR]=gsolve(pixR, B, l, wts);
+    [gG]=gsolve(pixG, B, l, wts);
+    [gB]=gsolve(pixB, B, l, wts);    
     
-    
-    a = zeros(256,1);
+    xAxis = zeros(256,1);
     for i = 1:256
-        a(i,1) = i;
-    end
-    
+        xAxis(i,1) = i;
+    end    
     f = figure();
     axis([-15 15 0 255])
-    plot(gRed,a,'r','LineWidth',2);
+    plot(gR,xAxis,'r','LineWidth',2);
     xlabel('log exposure X')
     ylabel('pixel value Z')
     title('Response Function for Red Channel');
     axis([-5 5 0 255])
-    saveas(f,strcat(outputDir,'/redResposeCurve-',num2str(LAMDA),'.jpg'));
-    plot(gGreen,a,'g','LineWidth',2);
+    saveas(f,strcat(outputDir,'/redResposeCurve-',num2str(l),'.jpg'));
+    plot(gG,xAxis,'g','LineWidth',2);
     xlabel('log exposure X')
     ylabel('pixel value Z')
     title('Response Function for Red Channel');
     axis([-5 5 0 255])
-    saveas(f,strcat(outputDir,'/greenResposeCurve-',num2str(LAMDA),'.jpg'));
-    plot(gBlue,a,'b','LineWidth',2);
+    saveas(f,strcat(outputDir,'/greenResposeCurve-',num2str(l),'.jpg'));
+    plot(gB,xAxis,'b','LineWidth',2);
     xlabel('log exposure X')
     ylabel('pixel value Z')
     title('Response Function for Red Channel');
     axis([-5 5 0 255])
-    saveas(f,strcat(outputDir,'/blueResposeCurve-',num2str(LAMDA),'.jpg'));
-    close(f);
-    
+    saveas(f,strcat(outputDir,'/blueResposeCurve-',num2str(l),'.jpg'));
+    close(f);  
     
 end
 
