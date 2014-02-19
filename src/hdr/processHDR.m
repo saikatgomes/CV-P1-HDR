@@ -48,4 +48,3 @@ function [  ] = processHDR( directory , LAMDA, R_saturation, R_brightness,M_satu
     end
     clear all;
 end
-

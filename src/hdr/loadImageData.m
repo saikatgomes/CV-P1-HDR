@@ -2,14 +2,12 @@
 %   Author: Saikat Gomes
 %           Steve Lazzaro
 %   CS 766 - Assignment 1
-%   Params: directory - relative directory of the *.info file
-%   Returns: name of simple hdr file created
+%   Load image data and prepare for HDR processing
 %--------------------------------------------------------------------------
 
-function [ filenames, exposures, imgCount,numPixels, ...
-    weights,zRed, zGreen, zBlue, sampleIndices  ] = ...
+function [ filenames, exposures, imgCount, pixelCount, ...
+    wts,pixelsRed, pixelsGreen, pixelsBlue, sampleIdx  ] = ...
     loadImageData( directory )
-
 
     infoFile = dir(strcat(directory,'*.info'));    %info file
     infoFileName=infoFile(1).name;
@@ -29,85 +27,49 @@ function [ filenames, exposures, imgCount,numPixels, ...
     end
     fclose(fid);
 
-    % sort ascending by exposure
-    [exposures indices] = sort(exposures);
-    filenames = filenames(indices);
-
-    % then inverse to get descending sort order
+    [exposures idx] = sort(exposures);
+    filenames = filenames(idx);
     exposures = exposures(end:-1:1);
     filenames = filenames(end:-1:1);
     
-    numExposures = size(filenames,2);
+    numOfImages = size(filenames,2);
     
-    fprintf('Opening test image\n');
-    tmp = imread(filenames{1});
-
-    numPixels = size(tmp,1) * size(tmp,2);
+    tmpImg = imread(filenames{1});
+    pixelCount = size(tmpImg,1) * size(tmpImg,2);
     imgCount = size(filenames,2);
 
-    fprintf('Computing weighting function\n');
-    % precompute the weighting function value
-    % for each pixel
-    weights = [];
-    for i=1:256
-        %weights(i) = weight(i,1,256);        
+    wts = [];
+    for i=1:256    
         if i <= 0.5 * (1 + 256)
-            weights(i) = ((i - 1) + 1); % never let the weights be zero because that would influence the equation system!!!
+            wts(i) = i;
         else
-            weights(i) = ((256 - i) + 1);
-        end
-        
+            wts(i) = 255-i;
+        end        
     end
         
-    % load and sample the images
-    %[zRed, zGreen, zBlue, sampleIndices] = makeImageMatrix(filenames, numPixels);
+    % load and sample the images    
+    % create a random sampling by choosing min number of pixels
+    numOfPixelsReq = ceil(255*2 / (numOfImages - 1)) * 2;    
+    step = pixelCount / numOfPixelsReq;
+    sampleIdx = floor((1:step:pixelCount));
+    sampleIdx = sampleIdx';
     
-    % determine the number of differently exposed images
-    numExposures = size(filenames,2);
+    pixelsRed = zeros(numOfPixelsReq, numOfImages);
+    pixelsGreen = zeros(numOfPixelsReq, numOfImages);
+    pixelsBlue = zeros(numOfPixelsReq, numOfImages);
     
-    
-    % Create the vector of sample indices    
-    % We need N(P-1) > (Zmax - Zmin)
-    % Assuming the maximum (Zmax - Zmin) = 255, 
-    % N = (255 * 2) / (P-1) clearly fulfills this requirement
-    numSamples = ceil(255*2 / (numExposures - 1)) * 10;
-    
-    % create a random sampling matrix, telling us which
-    % pixels of the original image we want to sample
-    % using ceil fits the indices into the range [1,numPixels+1],
-    % i.e. exactly the range of indices of zInput
-    step = numPixels / numSamples;
-    sampleIndices = floor((1:step:numPixels));
-    sampleIndices = sampleIndices';
-    
-    
-    % allocate resulting matrices
-    zRed = zeros(numSamples, numExposures);
-    zGreen = zeros(numSamples, numExposures);
-    zBlue = zeros(numSamples, numExposures);
-    
-    for i=1:numExposures
-        
-        % read the nth image
-        image = imread(filenames{i});
-        
-        % sample the image for each color channel        
-        redChannel = image(:,:,1);
-        zRedTemp = redChannel(sampleIndices);
-
-        greenChannel = image(:,:,2);
-        zGreenTemp = greenChannel(sampleIndices);
-
-        blueChannel = image(:,:,3);
-        zBlueTemp = blueChannel(sampleIndices);
-        
-        % build the resulting, small image consisting
-        % of samples of the original image
-        zRed(:,i) = zRedTemp;
-        zGreen(:,i) = zGreenTemp;
-        zBlue(:,i) = zBlueTemp;
-    end
-    
+    for i=1:numOfImages
+        image = imread(filenames{i});            
+        redCh = image(:,:,1);
+        rTemp = redCh(sampleIdx);
+        greenCh = image(:,:,2);
+        gTemp = greenCh(sampleIdx);
+        blueCh = image(:,:,3);
+        bTemp = blueCh(sampleIdx);        
+        pixelsRed(:,i) = rTemp;
+        pixelsGreen(:,i) = gTemp;
+        pixelsBlue(:,i) = bTemp;
+    end  
 
 end
 
