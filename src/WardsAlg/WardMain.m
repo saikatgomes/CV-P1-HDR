@@ -1,7 +1,7 @@
 function [] = WardMain(directory)
 
 %  WardMain - Run Wards algorithm on images, then cut off image pixels
-%  where appropriate, and then process hdr images
+%  where appropriate and write them to files in Dataset folders
 %--------------------------------------------------------------------------
 %   Author: Saikat Gomes
 %           Steve Lazzaro
@@ -11,7 +11,7 @@ function [] = WardMain(directory)
 %--------------------------------------------------------------------------
 
 ref_index = 1;
-max_shift = 2;
+max_shift = 7;
 tolerance = 4;
 LAMDA = 50;
 
@@ -20,25 +20,26 @@ LAMDA = 50;
 %%%% USE WARDS ALIGMENT BEFORE HDR WITHOUT FILTER %%%%
 
 shiftsNoFilter = GetAllShiftsWardAlg(pixArray, ref_index, max_shift, tolerance, 0);
-pixArrayShifted = ShiftPixelsAndCrop(shiftsNoFilter,pixArray);
+display('Shifts No Filter');
+display(shiftsNoFilter);
+pixArrayShiftedNoFilter = ShiftPixelsAndCrop(shiftsNoFilter,pixArray);
 
-addpath ./createHDR
-processHDRWards(pixArrayShifted,exposures,filenames,LAMDA);
-rmpath ./createHDR
+picture = zeros(size(pixArrayShiftedNoFilter,2), size(pixArrayShiftedNoFilter,3), 3);
+for i = 1:size(pixArrayShiftedNoFilter,1)
+    picture(:,:,:) = pixArrayShiftedNoFilter(i,:,:,:);
+    imwrite(picture,strcat('Dataset/outputNoFilter/img_nofilter_',i,'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
+end
 
 %%%% USE WARDS ALIGMENT BEFORE HDR WITH FILTER %%%%
 
 shiftsFilter = GetAllShiftsWardAlg(pixArray, ref_index, max_shift, tolerance, 1);
-pixArrayShifted = ShiftPixelsAndCrop(shiftsFilter,pixArray);
+display('Shifts Filter');
+display(shiftsFilter);
+pixArrayShiftedFilter = ShiftPixelsAndCrop(shiftsFilter,pixArray);
 
-addpath ./createHDR
-processHDRWards(pixArrayShifted,exposures,filenames,LAMDA);
-rmpath ./createHDR
-
-%%%% NORMAL HDR %%%%
-
-addpath ./createHDR
-processHDRWards(pixArray,exposures,filenames,LAMDA);
-rmpath ./createHDR
+for i = 1:size(pixArrayShiftedFilter,1)
+    picture(:,:,:) = pixArrayShiftedFilter(i,:,:,:);
+    imwrite(picture,strcat('Dataset/outputEdgeFilter/img_filter_',i,'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
+end
 
 end
