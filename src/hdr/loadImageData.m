@@ -5,7 +5,7 @@
 %   Load image data and prepare for HDR processing
 %--------------------------------------------------------------------------
 
-function [fNames,T,imgCount,pixelCount,wts,pixelsRed,pixelsGreen, ...
+function [fNames,T,imgCount,wts,pixelsRed,pixelsGreen, ...
     pixelsBlue] = loadImageData(directory)
 
     infoFile = dir(strcat(directory,'*.info'));    %info file
@@ -49,8 +49,8 @@ function [fNames,T,imgCount,pixelCount,wts,pixelsRed,pixelsGreen, ...
     % load and sample the images    
     % create a random sampling by choosing min number of pixels
     numOfPixelsReq = ceil(255*2 / (numOfImages - 1)) * 2;    
-    step = pixelCount / numOfPixelsReq;
-    sampleIdx = floor((1:step:pixelCount));
+    n = pixelCount / numOfPixelsReq;
+    sampleIdx = floor((1:n:pixelCount));
     sampleIdx = sampleIdx';
     
     pixelsRed = zeros(numOfPixelsReq, numOfImages);
