@@ -1,4 +1,4 @@
-function [ B ,gRed, gGreen, gBlue] = solveSVD( zRed, zGreen, zBlue, imgCount, exposures, LAMDA, weights )
+function [ B ,gRed, gGreen, gBlue] = solveSVD( zRed, zGreen, zBlue, imgCount, exposures, LAMDA, weights , outputDir)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -24,11 +24,14 @@ function [ B ,gRed, gGreen, gBlue] = solveSVD( zRed, zGreen, zBlue, imgCount, ex
     axis([-15 15 0 255])
     %subplot(1,3,1);
     plot(a,gRed,'r','LineWidth',2);
-    saveas(f,'fig.jpg');
+    saveas(f,strcat(outputDir,'/redResposeCurve-',num2str(LAMDA),'.jpg'));
     %subplot(1,3,2);
     plot(a,gGreen,'g','LineWidth',2);
+    saveas(f,strcat(outputDir,'/greenResposeCurve-',num2str(LAMDA),'.jpg'));
     %subplot(1,3,3);
     plot(a,gBlue,'b','LineWidth',2);
+    saveas(f,strcat(outputDir,'/blueResposeCurve-',num2str(LAMDA),'.jpg'));
+    close(f);
     
     
 end
