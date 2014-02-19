@@ -20,6 +20,8 @@ function [fNames,T,imgCount,wts,pixelsRed,pixelsGreen, ...
         lineVal=strsplit(tLine);    %split each line on spaces
         img = strcat(directory,'',lineVal(1)); %name of image file
         img=char(img);
+        display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
+            ' Loading image: ',img));
         T(i)=1/str2double(lineVal(2)); %exposure value for this file
         fNames{i}=img;
         tLine=fgets(fid);   %read next line
