@@ -2,63 +2,30 @@
 %   Author: Saikat Gomes
 %           Steve Lazzaro
 %   CS 766 - Assignment 1
-%   Params: directory - relative directory of the *.info file
-%   Returns: name of simple hdr file created
+%   Reinhard global tonemapping
 %--------------------------------------------------------------------------
+function [toneMappedPic] = reinhardGlobalToneMap(hdrMap,brightness,saturation)
+    %std formula
+    lumMap = 0.2125 * hdrMap(:,:,1) + 0.7154 * hdrMap(:,:,2) + 0.0721 * hdrMap(:,:,3);
+    pixelCount = size(hdrMap,1) * size(hdrMap,2);
 
-% Implements the Reinhard global tonemapping operator.
-%
-% parameters:
-% hdr: a rows * cols * 3 matrix representing a hdr radiance map
-%
-% a: defines the desired brightness level of the resulting tonemapped
-% picture. Lower values generate darker pictures, higher values brighter
-% pictures. Use values like 0.18, 0.36 or 0.72 for bright pictures, 0.09,
-% 0.045, ... for darker pictures.
-%
-% saturation: a value between 0 and 1 defining the desired saturation of
-% the resulting tonemapped image
-%
-function [ ldrPic ] = reinhardGlobalToneMap( hdr, a, saturation)
+    % avoid taking log(0)
+    delta = 0.0001;
 
-fprintf('Computing luminance map\n');
-%luminanceMap = makeLuminanceMap(hdr);
-luminanceMap = 0.2125 * hdr(:,:,1) + 0.7154 * hdr(:,:,2) + 0.0721 * hdr(:,:,3);
+    % the subjective brightness of the image for humans
+    key = exp((1/pixelCount)*(sum(sum(log(lumMap + delta)))));
+    scaledLum = lumMap * (brightness/key);    
+    ldrLuminanceMap = scaledLum ./ (scaledLum + 1); % range [0,1]
+    toneMappedPic = zeros(size(hdrMap));
 
-
-numPixels = size(hdr,1) * size(hdr,2);
-
-% small delta to avoid taking log(0) when encountering black pixels in the
-% luminance map
-delta = 0.0001;
-
-% compute the key of the image, a measure of the
-% average logarithmic luminance, i.e. the subjective brightness of the image a human
-% would approximateley perceive
-key = exp((1/numPixels)*(sum(sum(log(luminanceMap + delta)))));
-
-
-% scale to desired brightness level as defined by the user
-scaledLuminance = luminanceMap * (a/key);
-
-% all values are now mapped to the range [0,1]
-ldrLuminanceMap = scaledLuminance ./ (scaledLuminance + 1);
-
-
-ldrPic = zeros(size(hdr));
-
-% re-apply color according to Fattals paper "Gradient Domain High Dynamic
-% Range Compression"
-for i=1:3   
-    % (hdr(:,:,i) ./ luminance) MUST be between 0 an 1!!!!
-    % ...but hdr often contains bigger values than luminance!!!???
-    % so the resulting ldr pic needs to be clamped
-    ldrPic(:,:,i) = ((hdr(:,:,i) ./ luminanceMap) .^ saturation) .* ldrLuminanceMap;
-end
-
-% clamp ldrPic to 1
-indices = find(ldrPic > 1);
-ldrPic(indices) = 1;
+    % re-apply color according to Fattals paper 
+    % "Gradient Domain High Dynamic Range Compression"
+    for i=1:3   
+        toneMappedPic(:,:,i) = ((hdrMap(:,:,i) ./ ...
+            lumMap) .^ saturation) .* ldrLuminanceMap;
+    end
+    idx = find(toneMappedPic > 1);
+    toneMappedPic(idx) = 1;
 
 
 

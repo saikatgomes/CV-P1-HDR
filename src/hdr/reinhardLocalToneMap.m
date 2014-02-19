@@ -4,7 +4,7 @@
 %   CS 766 - Assignment 1
 %   Reinhard local tonemapping 
 %--------------------------------------------------------------------------
-function [ldrPic] = reinhardLocalToneMap(hdrMap,sat,eps,phi)
+function [toneMappedPic] = reinhardLocalToneMap(hdrMap,sat,eps,phi)
     
     lumMap = 0.2125 * hdrMap(:,:,1) + 0.7154 * hdrMap(:,:,2) + ...
         0.0721 * hdrMap(:,:,3);
@@ -63,15 +63,15 @@ function [ldrPic] = reinhardLocalToneMap(hdrMap,sat,eps,phi)
     
     % tonemapping
     lumCompressed = lumMap ./ (1 + v1Final);
-    ldrPic = zeros(size(hdrMap));
+    toneMappedPic = zeros(size(hdrMap));
 
     % re-apply color according to Fattals paper "Gradient Domain High Dynamic
     % Range Compression"
     for i=1:3
-        ldrPic(:,:,i) = ((hdrMap(:,:,i) ./ lumMap) .^ sat) .* lumCompressed;
+        toneMappedPic(:,:,i) = ((hdrMap(:,:,i) ./ lumMap) .^ sat) .* lumCompressed;
     end
-    indices = find(ldrPic > 1);
-    ldrPic(indices) = 1;
+    indices = find(toneMappedPic > 1);
+    toneMappedPic(indices) = 1;
    
     
     
