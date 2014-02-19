@@ -2,97 +2,61 @@
 %   Author: Saikat Gomes
 %           Steve Lazzaro
 %   CS 766 - Assignment 1
-%   Params: directory - relative directory of the *.info file
-%   Returns: name of simple hdr file created
+%   Generates a hdr radiance map from a set of pictures
 %--------------------------------------------------------------------------
+function [hdrMap] = createHDRMap(fNames,g_Red,g_Green,g_Blue,w,B)
 
-
-% Generates a hdr radiance map from a set of pictures
-%
-% parameters:
-% filenames: a list of filenames containing the differently exposed
-% pictures used to make a hdr from
-% gRed: camera response function for the red color channel
-% gGreen: camera response function for the green color channel
-% gBlue: camera response function for the blue color channel
-function [ hdr ] = createHDRMap( filenames, gRed, gGreen, gBlue, w, dt )
-
-    numExposures = size(filenames,2);
-   
-    % read the first image to get the width and height information
-    image = imread(filenames{1});
-   
-    % pre-allocate resulting hdr image
-    hdr = zeros(size(image));
+    numOfImages = size(fNames,2);
+    image = imread(fNames{1});
+    hdrMap = zeros(size(image));
     sum = zeros(size(image));
     
-    for i=1:numExposures
-        
-        fprintf('Adding picture %i of %i \n', i, numExposures);
+    for i=1:numOfImages
 
-        image = double(imread(filenames{i}));
+        image = double(imread(fNames{i}));
 
-        wij = w(image + 1);        
-        sum = sum + wij;
+        pixWt = w(image + 1);        
+        sum = sum + pixWt;
         
-        m(:,:,1) = (gRed(image(:,:,1) + 1) - dt(1,i));
-        m(:,:,2) = (gGreen(image(:,:,2) + 1) - dt(1,i));
-        m(:,:,3) = (gBlue(image(:,:,3) + 1) - dt(1,i));
+        mp(:,:,1) = (g_Red(image(:,:,1) + 1) - B(1,i));
+        mp(:,:,2) = (g_Green(image(:,:,2) + 1) - B(1,i));
+        mp(:,:,3) = (g_Blue(image(:,:,3) + 1) - B(1,i));
                 
-        % If a pixel is saturated, its information and
-        % that gathered from all prior pictures with longer exposure times is unreliable. Thus
-        % we ignore its influence on the weighted sum (influence of the
-        % same pixel from prior pics with longer exposure time ignored as
-        % well)
-        
-        saturatedPixels = ones(size(image));    
+        % If a pixel is saturated        
+        sPixls = ones(size(image));                
+        sPixls_R = find(image(:,:,1) == 255);
+        sPixls_G = find(image(:,:,2) == 255);
+        sPixlsB = find(image(:,:,3) == 255);
             
-        saturatedPixelsRed = find(image(:,:,1) == 255);
-        saturatedPixelsGreen = find(image(:,:,2) == 255);
-        saturatedPixelsBlue = find(image(:,:,3) == 255);
-            
-        % Mark the saturated pixels from a certain channel in *all three*
-        % channels
-        dim = size(image,1) * size(image,2);
+        D = size(image,1) * size(image,2);
  
-        saturatedPixels(saturatedPixelsRed) = 0;
-        saturatedPixels(saturatedPixelsRed + dim) = 0;
-        saturatedPixels(saturatedPixelsRed + 2*dim) = 0;
+        sPixls(sPixls_R) = 0;
+        sPixls(sPixls_R + D) = 0;
+        sPixls(sPixls_R + 2*D) = 0;
            
-        saturatedPixels(saturatedPixelsGreen) = 0;
-        saturatedPixels(saturatedPixelsGreen + dim) = 0;
-        saturatedPixels(saturatedPixelsGreen + 2*dim) = 0;
+        sPixls(sPixls_G) = 0;
+        sPixls(sPixls_G + D) = 0;
+        sPixls(sPixls_G + 2*D) = 0;
             
-        saturatedPixels(saturatedPixelsBlue) = 0;
-        saturatedPixels(saturatedPixelsBlue + dim) = 0;
-        saturatedPixels(saturatedPixelsBlue + 2*dim) = 0;
+        sPixls(sPixlsB) = 0;
+        sPixls(sPixlsB + D) = 0;
+        sPixls(sPixlsB + 2*D) = 0;
 
-        % add the weighted sum of the current pic to the resulting hdr radiance map        
-        hdr = hdr + (wij .* m);
+        % weighted sum        
+        hdrMap = hdrMap + (pixWt .* mp);
         
-        % remove saturated pixels from the radiance map and the sum (saturated pixels
-        % are zero in the saturatedPixels matrix, all others are one)
-        hdr = hdr .* saturatedPixels;
-        sum = sum .* saturatedPixels;
+        % remove saturated pixels from the radiance map and the sum 
+        hdrMap = hdrMap .* sPixls;
+        sum = sum .* sPixls;
     end
     
-    
-    % For those pixels that even in the picture with the smallest exposure time still are
-    % saturated we approximate the radiance only from that picture instead
-    % of taking the weighted sum
-    saturatedPixelIndices = find(hdr == 0);
-    
-    % Don't multiply with the weights since they are zero for saturated
-    % pixels. m contains the logRadiance value from the last pic, that one
-    % with the longest exposure time.
-    hdr(saturatedPixelIndices) = m(saturatedPixelIndices);
-    
-    % Fix the sum for those pixels to avoid division by zero
-    sum(saturatedPixelIndices) = 1;
+    sPixelIdx = find(hdrMap == 0);
+    hdrMap(sPixelIdx) = mp(sPixelIdx);
+    sum(sPixelIdx) = 1;     % avoid division by zero
     
     % normalize
-    hdr = hdr ./ sum;
-    hdr = exp(hdr);
+    hdrMap = hdrMap ./ sum;
+    hdrMap = exp(hdrMap);
     
     
     
