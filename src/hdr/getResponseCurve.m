@@ -13,9 +13,13 @@ function [B,gR,gG,gB] = getResponseCurve(pixR,pixG,pixB,imgCount,T,l,wts,outputD
     end
     
     % solve the system for each color channel
-    [gR]=gsolve(pixR, B, l, wts);
-    [gG]=gsolve(pixG, B, l, wts);
-    [gB]=gsolve(pixB, B, l, wts);    
+    display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
+            ' Solving SVD ... '));
+    [gR]=solveSVD(pixR, B, l, wts);
+    [gG]=solveSVD(pixG, B, l, wts);
+    [gB]=solveSVD(pixB, B, l, wts);    
+    display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
+            ' SVD solved. '));
     
     xAxis = zeros(256,1);
     for i = 1:256
