@@ -5,9 +5,8 @@
 %   Load image data and prepare for HDR processing
 %--------------------------------------------------------------------------
 
-function [ filenames, exposures, imgCount, pixelCount, ...
-    wts,pixelsRed, pixelsGreen, pixelsBlue, sampleIdx  ] = ...
-    loadImageData( directory )
+function [fNames,T,imgCount,pixelCount,wts,pixelsRed,pixelsGreen, ...
+    pixelsBlue] = loadImageData(directory)
 
     infoFile = dir(strcat(directory,'*.info'));    %info file
     infoFileName=infoFile(1).name;
@@ -15,28 +14,28 @@ function [ filenames, exposures, imgCount, pixelCount, ...
     fid=fopen(strcat(directory,'',infoFileName));
     tLine=fgets(fid);   %file line is the pic count
     count=str2num(tLine);
-    exposures = zeros(count,1);  %initialize vector
+    T = zeros(count,1);  %initialize vector
     tLine=fgets(fid);   %next line
     for i=1:count
         lineVal=strsplit(tLine);    %split each line on spaces
         img = strcat(directory,'',lineVal(1)); %name of image file
         img=char(img);
-        exposures(i)=1/str2double(lineVal(2)); %exposure value for this file
-        filenames{i}=img;
+        T(i)=1/str2double(lineVal(2)); %exposure value for this file
+        fNames{i}=img;
         tLine=fgets(fid);   %read next line
     end
     fclose(fid);
 
-    [exposures idx] = sort(exposures);
-    filenames = filenames(idx);
-    exposures = exposures(end:-1:1);
-    filenames = filenames(end:-1:1);
+    [T idx] = sort(T);
+    fNames = fNames(idx);
+    T = T(end:-1:1);
+    fNames = fNames(end:-1:1);
     
-    numOfImages = size(filenames,2);
+    numOfImages = size(fNames,2);
     
-    tmpImg = imread(filenames{1});
+    tmpImg = imread(fNames{1});
     pixelCount = size(tmpImg,1) * size(tmpImg,2);
-    imgCount = size(filenames,2);
+    imgCount = size(fNames,2);
 
     wts = [];
     for i=1:256    
@@ -59,7 +58,7 @@ function [ filenames, exposures, imgCount, pixelCount, ...
     pixelsBlue = zeros(numOfPixelsReq, numOfImages);
     
     for i=1:numOfImages
-        image = imread(filenames{i});            
+        image = imread(fNames{i});            
         redCh = image(:,:,1);
         rTemp = redCh(sampleIdx);
         greenCh = image(:,:,2);
