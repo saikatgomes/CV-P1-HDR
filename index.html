@@ -3,35 +3,43 @@
 </head>
 <body bgcolor="#000000">
 <center>
-<table width=1200 >
+<table width=1300 >
 	<tr align=center>
 		<td colspan=2>
 			<font color="ffffff">	
 			<h1></br>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</h1></br>
-			<i>Saikat R. Gomes (saikat@cs.wisc.edu)</br>
-			Steven Lazzaro (xxx@cs.wisc.edu)</i></br>
+			<i>Saikat R. Gomes (saikat@cs.wisc.edu) & Steven Lazzaro (xxx@cs.wisc.edu)</i></br>
 			</font>
 		</td>
 	</tr>
 	<tr>
 		<td colspan=2>
 			</br>
+			<hr>
 		</td>
 	</tr>
 	<tr>
+
+	<!-- #### DISPLAY AREA ### -->
+
 		<td alight=left>
 			<font color="ffffff">
-			<h3>Contents</h3>
+			<h2>Contents</h2>
 			<ol type="1">
-			  <li>Introdction</li>
+			  <li>Introduction</li>
 			  <li>Implementation Details</li>
 			  <ol type="1">
 			    <li>Image Acquisition</li>
-			    <li>Tea</li>
-			    <li>Milk</li>
+			    <li>Simple Pixel Averaging</li>
+			    <li>Reinhard's Local Tone Mapping</li>
+			    <li>Reinhard's Global Tone Mapping</li>
+			    <li>Ward's Algorithm</li>
 			  </ol>
-			  <li>Tea</li>
-			  <li>Milk</li>
+			  <li>Datasets</li>
+			  <li>Reults</li>
+			  <li>Code</li>
+			  <li>Git Logs</li>
+			  <li>References</li>
 			</ol>
 			</font>
 		</td>
@@ -39,13 +47,13 @@
 			<table cellspacing=0 cellpadding=0>
 				<tr>
 					<td rowspan=3>
-						<img src="doc/img/ToneMap-Matlab-8-100.jpg" height="450">
+						<img src="doc/img/ToneMap-Matlab-8-100.jpg" height="480"> &nbsp;
 					</td>
 					<td>
 						</br>
 					</td>
 					<td>						
-						<img src="doc/img/IMG_9495.jpg" height="150">
+						<img src="doc/img/IMG_9495.jpg" height="160">
 					</td>
 				</tr>
 				<tr>
@@ -53,7 +61,7 @@
 						</br>
 					</td>
 					<td>
-						<img src="doc/img/IMG_9496.jpg" height="150">
+						<img src="doc/img/IMG_9496.jpg" height="160">
 					</td>
 				</tr>
 				<tr>
@@ -61,12 +69,33 @@
 						</br>
 					</td>
 					<td>
-						<img src="doc/img/IMG_9497.jpg" height="150">
+						<img src="doc/img/IMG_9497.jpg" height="160">
 					</td>
 				</tr>
 			</table>
 		</td>
+
+	
+	<!-- #### DISPLAY AREA ### -->
+
 	</tr>
+	<tr align=center>
+		<td colspan=2>
+			<hr>
+			</br>
+<!--
+			<img src="doc/img/ToneMap-Matlab-1-100.jpg" width="150"> &nbsp;
+			<img src="doc/img/ToneMap-Matlab-3-100.jpg" width="150"> &nbsp;
+			<img src="doc/img/ToneMap-Matlab-5-100.jpg" width="150"> &nbsp;
+			<img src="doc/img/ToneMap-Matlab-6-100.jpg" width="150"> &nbsp;
+			<img src="doc/img/ToneMap-Matlab-8-100.jpg" width="150"> &nbsp;
+			<img src="doc/img/ToneMap-Matlab-10-100.jpg" width="150"> &nbsp;
+			<img src="doc/img/ToneMap-Matlab-12-100.jpg" width="150">
+-->
+		</td>
+
+	<tr>
+
 </table>
 </center>
 <body>
