@@ -16,6 +16,8 @@ function [  ] = processHDR( directory , LAMDA, R_saturation, R_brightness,M_satu
     eps = 0.05;
     phi = 8;
     %a = 0.72;
+    
+    aveImg(directory,outputDir);
 
     for l=LAMDA
     
