@@ -29,6 +29,7 @@ for i = 1:size(pixArrayShiftedNoFilter,1)
         for column = size(pixArrayShiftedNoFilter,3)
             for color = 1:3
                 picture(row,column,color) = pixArrayShiftedNoFilter(i,row,column,color);
+                display(picture(row,column,color));
             end
         end
     end
