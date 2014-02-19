@@ -32,6 +32,7 @@ for i = 1:size(pixArrayShiftedNoFilter,1)
             end
         end
     end
+    picture = uint8(picture);
     imwrite(picture,strcat('Dataset/outputNoFilter/img_nofilter_',i,'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
 end
 
