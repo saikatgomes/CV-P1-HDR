@@ -1,6 +1,14 @@
-
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 1
+%   Params: directory - relative directory of the *.info file
+%   Returns: name of simple hdr file created
+%--------------------------------------------------------------------------
 
 function [g]=gsolve(Z,B,l,w)
+
+
     n = 256;
     A = zeros(size(Z,1)*size(Z,2)+n+1,n+size(Z,1));
     b = zeros(size(A,1),1);

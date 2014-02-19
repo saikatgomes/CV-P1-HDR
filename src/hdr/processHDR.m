@@ -1,6 +1,12 @@
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 1
+%   Params: directory - relative directory of the *.info file
+%   Returns: name of simple hdr file created
+%--------------------------------------------------------------------------
+
 function [  ] = processHDR( directory , LAMDA, R_saturation, R_brightness,M_saturation)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
     
     outputDir=strcat(directory,'HDR_',datestr(now,'mmddyyyy_HHMMSSFFF'));
     mkdir(outputDir);
@@ -30,10 +36,10 @@ function [  ] = processHDR( directory , LAMDA, R_saturation, R_brightness,M_satu
         end
 
         for saturation=R_saturation
-            [ldrLocal]  = reinhardLocal(hdrMap, saturation, eps, phi);
+            [ldrLocal]  = reinhardLocalToneMap(hdrMap, saturation, eps, phi);
             imwrite(ldrLocal,strcat(outputDir,'/ToneMap-Local',num2str(saturation*1000),'-',num2str(l),'.jpg'));   
             for a=R_brightness            
-                [ldrGlobal] = reinhardGlobal( hdrMap, a, saturation );     
+                [ldrGlobal] = reinhardGlobalToneMap( hdrMap, a, saturation );     
                 imwrite(ldrGlobal,strcat(outputDir,'/ToneMap-Global-',num2str(saturation*1000),'-',num2str(a*1000),'-',num2str(l),'.jpg'));
             end  
         end      

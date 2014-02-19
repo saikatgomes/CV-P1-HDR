@@ -1,3 +1,12 @@
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 1
+%   Params: directory - relative directory of the *.info file
+%   Returns: name of simple hdr file created
+%--------------------------------------------------------------------------
+
+
 % Generates a hdr radiance map from a set of pictures
 %
 % parameters:

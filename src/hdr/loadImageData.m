@@ -1,8 +1,14 @@
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 1
+%   Params: directory - relative directory of the *.info file
+%   Returns: name of simple hdr file created
+%--------------------------------------------------------------------------
+
 function [ filenames, exposures, imgCount,numPixels, ...
     weights,zRed, zGreen, zBlue, sampleIndices  ] = ...
     loadImageData( directory )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
 
 
     infoFile = dir(strcat(directory,'*.info'));    %info file
