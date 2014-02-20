@@ -11,7 +11,7 @@ function [pixArrayShiftedNoFilter, pixArrayShiftedFilter] = WardMain(directory)
 %--------------------------------------------------------------------------
 
 ref_index = 1;
-max_shift = 5; % 5 is standard so go up to max of +- 64 pixel shift
+max_shift = 4; % 5 is standard so go up to max of +- 64 pixel shift
 tolerance = 2;
 
 [pixArray,exposures,filenames] = readImages(directory);
@@ -22,16 +22,19 @@ shiftsNoFilter = GetAllShiftsWardAlg(pixArray, ref_index, max_shift, tolerance, 
 display('Shifts No Filter');
 display(shiftsNoFilter);
 pixArrayShiftedNoFilter = ShiftPixelsAndCrop(shiftsNoFilter,pixArray);
+display(size(pixArrayShiftedNoFilter,1));
 
 picture = zeros(size(pixArrayShiftedNoFilter,2), size(pixArrayShiftedNoFilter,3), 3);
 for i = 1:size(pixArrayShiftedNoFilter,1)
     for row = 1:size(pixArrayShiftedNoFilter,2)
         for column = size(pixArrayShiftedNoFilter,3)
-            for color = 1:3
-                picture(row,column,color) = pixArrayShiftedNoFilter(i,row,column,color);
-            end
+            picture(row,column,1) = pixArrayShiftedNoFilter(i,row,column,1);
+            picture(row,column,2) = pixArrayShiftedNoFilter(i,row,column,2);
+            picture(row,column,3) = pixArrayShiftedNoFilter(i,row,column,3);
+            picture = uint8(picture);
         end
     end
+    %imshow(picture);
     picture = uint8(picture);
     imwrite(picture,strcat('Dataset/outputNoFilter/img_nofilter_',num2str(i),'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
 end
@@ -48,10 +51,15 @@ for i = 1:size(pixArrayShiftedFilter,1)
     for row = 1:size(pixArrayShiftedFilter,2)
         for column = size(pixArrayShiftedFilter,3)
             for color = 1:3
-                picture(row,column,color) = pixArrayShiftedFilter(i,row,column,color);
+                picture(row,column,1) = pixArrayShiftedFilter(i,row,column,1);
+                picture(row,column,2) = pixArrayShiftedFilter(i,row,column,2);
+                picture(row,column,3) = pixArrayShiftedFilter(i,row,column,3);
+                picture = uint8(picture);
             end
         end
     end
+    %imshow(picture);
+    picture = uint8(picture);
     imwrite(picture,strcat('Dataset/outputEdgeFilter/img_filter_',num2str(i),'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
 end
 
