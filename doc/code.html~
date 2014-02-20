@@ -51,9 +51,37 @@
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 
-<h2> <center> Running the Code </center> </h2>
- 
-In order to run our HDR algorithm without using Ward's algorithm, all you have to do is call the <i>main</i> function in the folder <i>src/hdr/</i> and pass in parameter values for the directory in which the images are located, and a lamda value for the level of smoothing.  In the directory where the images are located, there should be a file with the extension <i>.info</i> in which the first line contains the number of images, and the remaining lines contain the name of each image along with its shutter speed (<a href = "img/infoFile/museum.info"> see example here</a>).  The main function will show as well as write images using the Matlab tone mapping function, Reinhard's local tone mapping function, and Reinhard's global tone mapping function.  In order use our Ward's algorithm implementation, you must call the <i>WardMain</i> function in the folder <i>src/WardsAlg/</i> and pass in a directory where the images and <i>.info</i> file are located.  The WardMain function will write new images that have been shifted and cropped based on the output of Ward's algorithm with and without using an edge filter.  The location of these output images are <i>src/WardsAlg/Dataset/outputEdgeFilter/</i> for the edge filtered images, and <i>src/WardsAlg/Dataset/outputNoFilter/</i> for the non-filtered images.
+<h2> Running the Code </h2>
+The software implementation was done in Matlab.<br>
+The code package can be downloaded from <a>here</a>.<br></br>
+
+HDR implementation:<br>
+
+The hdr fuctionality is implemented hdr folder.</br>
+Syntax:</br></br>
+processHDR( D , L , R_S , R_B , M_S ); </br></br>
+where:</br>
+D: Name of the directory containing the *.info file; ex: '../../Images/imageSet1/ (note: it expects a '/' in the end)</br>
+L: is a vector containing the smoothing fact (lamda) used to create the hdr format; ex: [ 1 50 100 ]</br>
+R_S: is a vector containg the saturation factor used in Rienhard's Local and Global Tone mapping; ex [0.6 0.8]</br>
+R_B: is a vector containg the bightness fatcor used in Rienhard's Global Tone mapping; ex: [0.76 0.92]</br>
+M_S: is a vector containg the saturation factores used in the matlab tone mapping functions; ex: [1 5 10 50 10]</br></br>
+A *.info file is expected in the directory folder (D) in which the first line contains the number of images, and the remaining lines contain the name of each image along with its shutter speed (<a href = "img/infoFile/museum.info"> see example here</a>).<br>
+
+A unique output folder in the form of 'HDR_{$timestamp}' is created in the directory where all the output files are created:<br>
+Output Files:</br></br>
+aveImage.jpg ... created by averaging the pixels of the input files</br>
+redResponseCurve-{L}.jpg ... red response curve estimated (one for each L value)</br>
+greenResponseCurve-{L}.jpg ... green response curve estimated (one for each L value)</br>
+blueResponseCurve-{L}.jpg ... blue response curev estimated (one for each L value)</br>
+imageHDR-{L}.hdr ... the HDR file formated created (one for each L value)</br>
+ToneMap-Matlab-{M_S}-{L}.jpg ... tonemapped image using Matlab inbuilt functionality (one for each L & M_S value)</br>
+ToneMap-Local-{R_S}-{L}.jpg ... tonemapped image using Reinhard's Local Tone Mapping implemented by us. (one for each L & R_S value)</br>
+ToneMap-Global-{R_S}-{R_B}-{L}.jpg ... tonemapped image using Reinhard's Global Tone Mapping implemented by us. (one for each L, R_S & R_B value)</br></br>
+
+
+
+In order use our Ward's algorithm implementation, you must call the <i>WardMain</i> function in the folder "<i>src/WardsAlg/</i>" and pass in a directory where the images and <i>.info</i> file are located.  The WardMain function will write new images that have been shifted and cropped based on the output of Ward's algorithm with and without using an edge filter.  The location of these output images are "<i>src/WardsAlg/Dataset/outputEdgeFilter/</i>" for the edge filtered images, and "<i>src/WardsAlg/Dataset/outputNoFilter/</i>" for the non-filtered images.
 
 
 

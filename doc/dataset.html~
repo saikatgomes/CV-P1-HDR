@@ -67,7 +67,7 @@
 							</font>
 						</td>
 						<td>
-							<img src="img/img1.JPG" width="325"></br>
+							<a href="img/img1.JPG" target="_blank"><img src="img/img1.JPG" width="325"></a></br>
 							<font color="ffffff">
 							<h2>Original Image 2</h2>
 
@@ -79,7 +79,7 @@
 							</font>
 						</td>
 						<td>
-							<img src="img/img3.JPG" width="325"></br>
+							<a href="img/img3.JPG" target="_blank"><img src="img/img3.JPG" width="325"></a></br>
 							<font color="ffffff">
 							<h2>Original Image 3</h2>
 
@@ -98,7 +98,7 @@
 					</tr>
 					<tr>
 						<td>
-							<img src="img/IMG_9495.jpg" width="325"></br>
+							<a href="img/IMG_9495.jpg" target="_blank"><img src="img/IMG_9495.jpg" width="325"></a></br>
 							<font color="ffffff">
 							<h2>Original Image 1</h2>
 							Exposure Time: 4 sec.</br>
@@ -108,7 +108,7 @@
 							</font>
 						</td>
 						<td>
-							<img src="img/IMG_9496.jpg" width="325"></br>
+							<a href="img/IMG_9496.jpg" target="_blank"><img src="img/IMG_9496.jpg" width="325"></a></br>
 							<font color="ffffff">
 							<h2>Original Image 2</h2>
 							Exposure Time: 1 sec.</br>
@@ -118,7 +118,7 @@
 							</font>
 						</td>
 						<td>
-							<img src="img/IMG_9497.jpg" width="325"></br>
+							<a href="img/IMG_9497.jpg" target="_blank"><img src="img/IMG_9497.jpg" width="325"></a></br>
 							<font color="ffffff">
 							<h2>Original Image 3</h2>	
 							Exposure Time: 1 sec.</br>
