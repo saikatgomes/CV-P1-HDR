@@ -6,7 +6,7 @@
 %   Returns: name of simple hdr file created
 %--------------------------------------------------------------------------
 
-function [  ] = processHDR( inDir, LAMDA, R_SAT, R_BRIGHT, M_SAT)
+function [  ] = processHDRWards( inDir, LAMDA, R_SAT, R_BRIGHT, M_SAT, pixArray, T, fileNames)
     
     warning('off','all');
     outDir=strcat(inDir,'HDR_',datestr(now,'mmddyyyy_HHMMSSFFF'));
@@ -26,21 +26,21 @@ function [  ] = processHDR( inDir, LAMDA, R_SAT, R_BRIGHT, M_SAT)
     
         display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
             ' Loading image data ... '));
-        [fNames,T,imgCount,wts,pixelsRed,pixelsGreen, ...
-            pixelsBlue] = loadImageData(inDir);
+        [wts,pixelsRed,pixelsGreen, ...
+            pixelsBlue] = loadImageDataWards(pixArray);
         display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
             ' Image data loaded.'));
 
         display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
             ' Estimate camera response curve ... '));
-        [B,g_Red,g_Green,g_Blue] = getResponseCurve(pixelsRed,pixelsGreen, ...
-            pixelsBlue,imgCount,T,l,wts,outDir);
+        [B,g_Red,g_Green,g_Blue] = getResponseCurveWards(pixelsRed,pixelsGreen, ...
+            pixelsBlue,size(pixArray,1),T,l,wts);
         display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
             ' Camera response curve estimated. '));
 
         display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
             ' Creating HDR file ... '));
-        hdrMap = createHDRMap(fNames,g_Red,g_Green,g_Blue,wts,B);
+        hdrMap = createHDRMapWards(fileNames,g_Red,g_Green,g_Blue,wts,B);
         hdrwrite(hdrMap,strcat(outDir,'/imageHDR-',num2str(l),'.hdr'));
         display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
             ' HDR file created ... '));

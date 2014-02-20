@@ -35,13 +35,13 @@ function [B,gR,gG,gB] = getResponseCurve(pixR,pixG,pixB,imgCount,T,l,wts,outputD
     plot(gG,xAxis,'g','LineWidth',2);
     xlabel('log exposure X')
     ylabel('pixel value Z')
-    title('Response Function for Red Channel');
+    title('Response Function for Gree Channel');
     axis([-4 4 0 255])
     saveas(f,strcat(outputDir,'/greenResposeCurve-',num2str(l),'.jpg'));
     plot(gB,xAxis,'b','LineWidth',2);
     xlabel('log exposure X')
     ylabel('pixel value Z')
-    title('Response Function for Red Channel');
+    title('Response Function for Blue Channel');
     axis([-4 4 0 255])
     saveas(f,strcat(outputDir,'/blueResposeCurve-',num2str(l),'.jpg'));
     close(f);  
