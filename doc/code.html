@@ -108,9 +108,19 @@ Here is a sample execution output:<br>
 </i>
 
 
-<b><u>Ward's algorithm implementation:</u></b></br>
+<b><u>Ward's algorithm implementation:</u></b></br></br>
 
-In order use our Ward's algorithm implementation, you must call the <i>WardMain</i> function in the folder "<i>src/WardsAlg/</i>" and pass in a directory where the images and <i>.info</i> file are located.  The WardMain function will write new images that have been shifted and cropped based on the output of Ward's algorithm with and without using an edge filter.  The location of these output images are "<i>src/WardsAlg/Dataset/outputEdgeFilter/</i>" for the edge filtered images, and "<i>src/WardsAlg/Dataset/outputNoFilter/</i>" for the non-filtered images.
+Our Ward's algorithm implementation is located in the WardsAlg folder.</b></br></br>
+Syntax:<br>
+<b><i>WardMain(directory);</i></b>
+</br></br>
+where:</br>
+directory: Name of the directory containing the images and *.info file.</br></br>
+
+Output Files:</br>
+(same as above without response curves)<br></br>
+Note:</br>
+Ward's algorithm is run with the parameter values of 3 for the max bit shift (so allowing +-16 pixel differences), and 3 for the tolerance level.  These values can be altered within the WardMain function if necessary. This function outputs HDR images for 3 scenarios: one for Ward's standard algorithm without an edge filter, another for Ward's algorithm with an edge filter, and one standard HDR for the purpose of comparison.
 
 
 
