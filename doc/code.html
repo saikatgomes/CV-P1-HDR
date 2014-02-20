@@ -80,6 +80,26 @@ ToneMap-Local-{R_S}-{L}.jpg ... tonemapped image using Reinhard's Local Tone Map
 ToneMap-Global-{R_S}-{R_B}-{L}.jpg ... tonemapped image using Reinhard's Global Tone Mapping implemented by us. (one for each L, R_S & R_B value)</br></br>
 Here is a sample execution output:<br>
 
+>> processHDR('../../Images/museumHDR/',[50],[3],[1],[5]);<br>
+18:47:38 [INFO] Output dir created at../../Images/museumHDR/HDR_02192014_184737869<br>
+18:47:38 [INFO] Creating average image ...<br>
+18:47:57 [INFO] Average image created.<br>
+18:47:57 [INFO] Loading image data ...<br>
+18:47:58 [INFO] Loading image:../../Images/museumHDR/IMG_9495.jpg<br>
+18:47:58 [INFO] Loading image:../../Images/museumHDR/IMG_9496.jpg<br>
+18:47:58 [INFO] Loading image:../../Images/museumHDR/IMG_9497.jpg<br>
+18:48:00 [INFO] Image data loaded.<br>
+18:48:00 [INFO] Estimate camera response curve ...<br>
+18:48:00 [INFO] Solving SVD ...<br>
+18:48:01 [INFO] SVD solved.<br>
+18:48:03 [INFO] Camera response curve estimated.<br>
+18:48:03 [INFO] Creating HDR file ...<br>
+18:48:22 [INFO] HDR file created ...<br>
+18:48:22 [INFO] Creating standard tonemap(s) ...<br>
+18:48:39 [INFO] Standard tonemap(s) created.<br>
+18:48:39 [INFO] Creating Reinhard tonemap(s) ...<br>
+18:48:55 [INFO] Reinhard tonemap(s) created.<br><br>
+
 
 In order use our Ward's algorithm implementation, you must call the <i>WardMain</i> function in the folder "<i>src/WardsAlg/</i>" and pass in a directory where the images and <i>.info</i> file are located.  The WardMain function will write new images that have been shifted and cropped based on the output of Ward's algorithm with and without using an edge filter.  The location of these output images are "<i>src/WardsAlg/Dataset/outputEdgeFilter/</i>" for the edge filtered images, and "<i>src/WardsAlg/Dataset/outputNoFilter/</i>" for the non-filtered images.
 
