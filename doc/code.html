@@ -61,10 +61,10 @@
 The software implementation was done in Matlab.<br>
 The code package can be downloaded from <a>here</a>.<br></br>
 
-<h3>HDR implementation:</h3><br>
+<b><u>HDR implementation:</u></b></br></br>
 
-The hdr fuctionality is implemented in the hdr folder.</br>
-Syntax:</br></br>
+The hdr fuctionality is implemented in the hdr folder.</br></br>
+Syntax:</br>
 <b><i>processHDR( D , L , R_S , R_B , M_S );</i></b> </br></br>
 where:</br>
 D: Name of the directory containing the *.info file; ex: '../../Images/imageSet1/ (note: it expects a '/' in the end)</br>
@@ -106,6 +106,9 @@ Here is a sample execution output:<br>
 18:48:39 [INFO] Creating Reinhard tonemap(s) ...<br>
 18:48:55 [INFO] Reinhard tonemap(s) created.<br><br>
 </i>
+
+
+<b><u>Ward's algorithm implementation:</u></b></br>
 
 In order use our Ward's algorithm implementation, you must call the <i>WardMain</i> function in the folder "<i>src/WardsAlg/</i>" and pass in a directory where the images and <i>.info</i> file are located.  The WardMain function will write new images that have been shifted and cropped based on the output of Ward's algorithm with and without using an edge filter.  The location of these output images are "<i>src/WardsAlg/Dataset/outputEdgeFilter/</i>" for the edge filtered images, and "<i>src/WardsAlg/Dataset/outputNoFilter/</i>" for the non-filtered images.
 
