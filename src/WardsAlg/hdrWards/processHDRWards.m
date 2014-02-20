@@ -2,8 +2,15 @@
 %   Author: Saikat Gomes
 %           Steve Lazzaro
 %   CS 766 - Assignment 1
-%   Params: directory - relative directory of the *.info file
-%   Returns: name of simple hdr file created
+%   Params: directory - relative directory of the image files
+%           LAMDA - smoothness term
+%           R_SAT - saturation term
+%           R_BRIGHT - brightness term
+%           M_SAT - saturation term
+%           pixArray - 4-d pixel array
+%           T - exposures array
+%           fileNames - file names array
+% 
 %--------------------------------------------------------------------------
 
 function [  ] = processHDRWards( inDir, LAMDA, R_SAT, R_BRIGHT, M_SAT, pixArray, T, fileNames)

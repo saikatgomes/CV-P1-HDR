@@ -7,6 +7,11 @@ function [pixArrayShiftedNoFilter, pixArrayShiftedFilter] = WardMain(directory)
 %           Steve Lazzaro
 %   CS 766 - Assignment 1
 %   Params: directory - relative directory of the *.info file and images
+%   
+%   Returns: pixArrayShiftedNoFilter - the shifted pixel array without an
+%            edge filter
+%            pixArrayShiftedFilter - the shifted pixel array with an
+%            edge filter
 %
 %--------------------------------------------------------------------------
 
