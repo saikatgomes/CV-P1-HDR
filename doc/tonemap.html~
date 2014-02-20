@@ -51,7 +51,7 @@
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 
-<h3><center> Tone Mapping (Matlab) </center></h3>
+<h2><center> Tone Mapping (Matlab) </center></h2>
 
 Once the *.hdr file was created, matlab's builtin tonemapping operator was applied with different saturation parameters to obtain tonemaps.
 Below are some of the results on the data sets.

@@ -51,7 +51,7 @@
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 
-<h3><center> Reinhard's Global Tone Mapping </center></h3>
+<h2><center> Reinhard's Global Tone Mapping </center></h2>
 
 Once the *.hdr file was created Reinhard's Global tonemapping operator was implemented (see code) and applied with different saturation parameters to obtain tonemaps.
 Below are some of the results on the data sets.

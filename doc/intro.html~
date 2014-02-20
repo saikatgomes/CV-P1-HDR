@@ -62,7 +62,7 @@ We compared HDR images that we produced with those standard methods to what we c
 </li>
 <br>
 <li>
-We also experiment with different tone mapping algorithms.  We compared images between Matlab's tone mapping algorithm, and our implementations of Reinhard et al.'s local algorithm, and Reinhard et al.'s global algorithm.  We found that Matlab's tone mapping generally gave better results than the Reinhard tone mapping algorithms.  However, at times, Reinhard’s tone mapping algorithm gave a much more realistic looking image than that of Matlab.
+We also experiment with different tone mapping algorithms.  We compared images between Matlab's tone mapping algorithm, and our implementations of Reinhard et al.'s local algorithm, and Reinhard et al.'s global algorithm.  We found that Matlab's tone mapping generally gave better results than the Reinhard tone mapping algorithms.  However, at times, Reinhard's tone mapping algorithm gave a much more realistic looking image than that of Matlab.
 </li>
 <br>
 <li>

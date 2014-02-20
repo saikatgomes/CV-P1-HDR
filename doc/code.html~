@@ -4,7 +4,7 @@
 
 <!-- INTRO -->
 
-<body bgcolor="#000000">
+<body bgcolor="#000000" link="#C0C0C0" vlink="#808080" alink="#FF0000">
 <center>
 <table width=1300 >
 	<tr align=center>
@@ -68,8 +68,8 @@ R_B: is a vector containg the bightness fatcor used in Rienhard's Global Tone ma
 M_S: is a vector containg the saturation factores used in the matlab tone mapping functions; ex: [1 5 10 50 10]</br></br>
 A *.info file is expected in the directory folder (D) in which the first line contains the number of images, and the remaining lines contain the name of each image along with its shutter speed (<a href = "img/infoFile/museum.info"> see example here</a>).<br>
 
-A unique output folder in the form of 'HDR_{$timestamp}' is created in the directory where all the output files are created:<br>
-Output Files:</br></br>
+A unique output folder in the form of 'HDR_{$timestamp}' is created in the directory where all the output files are created:<br><br>
+Output Files:</br>
 aveImage.jpg ... created by averaging the pixels of the input files</br>
 redResponseCurve-{L}.jpg ... red response curve estimated (one for each L value)</br>
 greenResponseCurve-{L}.jpg ... green response curve estimated (one for each L value)</br>
