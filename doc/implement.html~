@@ -4,13 +4,15 @@
 
 <!-- INTRO -->
 
-<body bgcolor="#000000">
+<body bgcolor="#000000" link="#C0C0C0" vlink="#808080" alink="#FF0000">
 <center>
 <table width=1300 >
 	<tr align=center>
 		<td colspan=2>
-			<font color="ffffff">	
+			<font color="#58FAF4">
 			<h1><b>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</b></h1>
+			</font>
+			<font color="#FFFFFF">			
 			<i>Saikat R. Gomes (<a href="mailto=saikat@cs.wisc.edu">saikat@cs.wisc.edu</a>) & Stephen Lazzaro (<a href="mailto=slazzaro@cs.wisc.edu">slazzaro@cs.wisc.edu</a>)</i>
 			</font>
 		</td>
@@ -24,7 +26,11 @@
 	<tr>
 		<td width='315' alight=left valign=top>
 			<font color="ffffff">
-			<h2>Contents</h2>
+			<h2>
+			<font color="#A9F5F2">	
+			Contents
+			</font>
+			</h2>
 			<ol type="0">
 			  <li><a href="../index.html">Home</a></li>
 			  <li><a href="intro.html">Introduction</li>
@@ -51,11 +57,11 @@
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 
-<h2>Implementation</h2>
+<h2><center>Implementation</center></h2>
 
 Our implementation consists of mainly four main parts. </br> </br>
 
-The first part of our implementation (and probably the simplest) is our <b><u>"naive pixel averaging"</u></b> implementation.  This involves taking an average of the pixel values over all images of the various exposures for a particular scene.  We thought it would be an interesting experiment to compare the results for this simple averaging method to the results we retrieved using the standard HDR methods.  Some examples of images that were created with this averaging method are shown in <a href="simple.html">"Simple Pixel Avergaing"</a> section.</br></br>
+The first part of our implementation (and probably the simplest) is our <b><u>"naive pixel averaging"</u></b> implementation.  This involves taking an average of the pixel values over all images of the various exposures for a particular scene.  We thought it would be an interesting experiment to compare the results for this simple averaging method to the results we retrieved using the standard HDR methods. Some examples of images that were created with this averaging method are shown in <a href="simple.html">"Simple Pixel Averaging"</a> section.</br></br>
 
 The second portion of our implementation consists of using <i><u>Debevec and Maliks'</u></i> methods to calculate the <b><u>response functions</u></b> <a href="rc.html">(see here)</a>.</br>
 We experimented with various smoothness values (lamda) and found 50-100 to produce the best images. (Again this is subjective to the viewer!)</br>

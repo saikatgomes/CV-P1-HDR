@@ -9,8 +9,10 @@
 <table width=1300 >
 	<tr align=center>
 		<td colspan=2>
-			<font color="ffffff">	
+			<font color="#58FAF4">
 			<h1><b>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</b></h1>
+			</font>
+			<font color="#FFFFFF">			
 			<i>Saikat R. Gomes (<a href="mailto=saikat@cs.wisc.edu">saikat@cs.wisc.edu</a>) & Stephen Lazzaro (<a href="mailto=slazzaro@cs.wisc.edu">slazzaro@cs.wisc.edu</a>)</i>
 			</font>
 		</td>
@@ -24,10 +26,14 @@
 	<tr>
 		<td width='315' alight=left valign=top>
 			<font color="ffffff">
-			<h2>Contents</h2>
+			<h2>
+			<font color="#A9F5F2">	
+			Contents
+			</font>
+			</h2>
 			<ol type="0">
 			  <li><a href="../index.html">Home</a></li>
-			  <li>Introduction</li>
+			  <li><a href="intro.html">Introduction</a></li>
 			  <li><a href="implement.html">Implementation</a></li>
 			  <ol type="1">
 			    <li><a href="imgAcc.html">Image Acquisition</a></li>
@@ -54,11 +60,11 @@
 
 In simple terms, HDR imaging consists of taking a series of images of a static scene at varying exposures, and merging the best portions of each image in order to maximize the dynamic range for a photo of the scene.  In order to construct HDR images, we implemented the algorithm that Debevec and Malik (1997) introduced along with the tone mapping algorithm described by Reinhard et. al.  We also implemented Ward's alignment algorithm in order to handle the common problem of misaligned photos. 
 <br><br> 
-<center>Summary Of Findings</center>
+<center>Some Of Findings</center>
 
 <ol> 
 <li>
-We compared HDR images that we produced with those standard methods to what we call naive HDR images, which are constructed by taking the average value of each pixel from all of the images used for HDR.  We found that the naive HDR image did contain a high range of colors, but that those colors ended up being quite dull compared to images produced from standard HDR methods. 
+We compared HDR images that we produced with those standard methods to what we call naive pixel averaging images, which are constructed by taking the average value of each pixel from all of the images used for HDR.  As expected we found that the naive method did not contain a high range of colors even though most of the times they were more visually appealing to the eye that the input images.
 </li>
 <br>
 <li>

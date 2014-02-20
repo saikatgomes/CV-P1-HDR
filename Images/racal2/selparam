@@ -1,8 +1,0 @@
-id	selparam	RRSelectParamData
-creator	nobody
-numSource	0
-kernelSize	3
-trimRatio	0.8
-saturationLevel	9.900000e-001
-noiseLevel	0.100000e-001
-maxSamplingNumber	1000
