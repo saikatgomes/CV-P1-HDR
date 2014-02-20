@@ -1,0 +1,80 @@
+function [pixArrayShiftedNoFilter, pixArrayShiftedFilter] = WardMain(directory)
+
+%  WardMain - Run Wards algorithm on images, then cut off image pixels
+%  where appropriate and write them to files in Dataset folders
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 1
+%   Params: directory - relative directory of the *.info file and images
+%
+%--------------------------------------------------------------------------
+
+ref_index = 1;
+max_shift = 4; % 5 is standard so go up to max of +- 64 pixel shift
+tolerance = 2;
+LAMDA = 100;
+R_SAT = 4;
+R_BRIGHT = 1;
+M_SAT = 1;
+
+[pixArray,exposures,filenames] = readImages(directory);
+
+%%%% USE WARDS ALIGMENT BEFORE HDR WITHOUT FILTER %%%%
+
+shiftsNoFilter = GetAllShiftsWardAlg(pixArray, ref_index, max_shift, tolerance, 0);
+display('Shifts No Filter');
+display(shiftsNoFilter);
+pixArrayShiftedNoFilter = ShiftPixelsAndCrop(shiftsNoFilter,pixArray);
+
+addpath
+processHDRWards(directory, LAMDA, R_SAT, R_BRIGHT, M_SAT, pixArrayShiftedNoFilter, exposures, filenames);
+
+% picture = zeros(size(pixArrayShiftedNoFilter,2), size(pixArrayShiftedNoFilter,3), 3);
+% for i = 1:size(pixArrayShiftedNoFilter,1)
+%     for row = 1:size(pixArrayShiftedNoFilter,2)
+%         for column = size(pixArrayShiftedNoFilter,3)
+%             picture(row,column,1) = pixArrayShiftedNoFilter(i,row,column,1);
+%             picture(row,column,2) = pixArrayShiftedNoFilter(i,row,column,2);
+%             picture(row,column,3) = pixArrayShiftedNoFilter(i,row,column,3);
+%             picture = uint8(picture);
+%         end
+%     end
+%     %imshow(picture);
+%     picture = uint8(picture);
+%     imwrite(picture,strcat('Dataset/outputNoFilter/img_nofilter_',num2str(i),'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
+% end
+
+%%%% USE WARDS ALIGMENT BEFORE HDR WITH FILTER %%%%
+
+shiftsFilter = GetAllShiftsWardAlg(pixArray, ref_index, max_shift, tolerance, 1);
+display('Shifts Filter');
+display(shiftsFilter);
+pixArrayShiftedFilter = ShiftPixelsAndCrop(shiftsFilter,pixArray);
+
+processHDRWards(directory, LAMDA, R_SAT, R_BRIGHT, M_SAT, pixArrayShiftedFilter, exposures, filenames);
+
+% picture = zeros(size(pixArrayShiftedFilter,2), size(pixArrayShiftedFilter,3), 3);
+% for i = 1:size(pixArrayShiftedFilter,1)
+%     for row = 1:size(pixArrayShiftedFilter,2)
+%         for column = size(pixArrayShiftedFilter,3)
+%             for color = 1:3
+%                 picture(row,column,1) = pixArrayShiftedFilter(i,row,column,1);
+%                 picture(row,column,2) = pixArrayShiftedFilter(i,row,column,2);
+%                 picture(row,column,3) = pixArrayShiftedFilter(i,row,column,3);
+%                 picture = uint8(picture);
+%             end
+%         end
+%     end
+%     %imshow(picture);
+%     picture = uint8(picture);
+%     imwrite(picture,strcat('Dataset/outputEdgeFilter/img_filter_',num2str(i),'_',datestr(now,'mmddyyyy_HHMMSSFFF'),'.jpg'));
+% end
+
+%%%% USE NORMAL HDR WITHOUT WARDS %%%%
+
+display('Normal HDR');
+
+processHDRWards(directory, LAMDA, R_SAT, R_BRIGHT, M_SAT, pixArray, exposures, filenames);
+
+end
