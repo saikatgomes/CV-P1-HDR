@@ -22,16 +22,14 @@ numRows = size(pixArray,2);
 numColumns = size(pixArray,3);
 
 shiftedArray = zeros(numPhotos,numRows,numColumns,3);
-
+display('Beginning to crop photos');
 for photo = 1:numPhotos
     curr_shift_x = shifts(photo,1);
     curr_shift_y = shifts(photo,2); 
     for row = 1:numRows
         for column = 1:numColumns
-            if column + curr_shift_x < 1 || ...
-                    column + curr_shift_x > numColumns || ...
-                    row + curr_shift_y < 1 || ...
-                    row + curr_shift_y > numRows
+            if column + curr_shift_x < 1 || column + curr_shift_x > numColumns || ...
+                    row + curr_shift_y < 1 || row + curr_shift_y > numRows
                 %Do nothing, leave pixel as 0
             else
                 shiftedArray(photo,row + curr_shift_y, column + curr_shift_x,:) = pixArray(photo,row, column,:);
@@ -41,6 +39,6 @@ for photo = 1:numPhotos
 end
 
 shiftedCroppedPixArray = shiftedArray(:,maxYshift+1:(numRows-abs(minYshift)), maxXshift+1:(numColumns-abs(minXshift)),:);
-
+display('Finished cropping photos');
 end
 
